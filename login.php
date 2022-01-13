@@ -1,11 +1,24 @@
-<?php include_once("includes/header.php"); ?>
+<?php
+
+session_start();
+if (isset($_SESSION["user_id"])) {
+    header("Location: index.php");
+    exit();
+}
+
+include_once("includes/header.php");
+
+?>
 
 <h1>Login</h1>
 
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off">
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" autocomplete="off" class="login">
     <input type="email" name="email" placeholder="Email" autocomplete="off" />
     <input type="password" name="password" placeholder="Password" autocomplete="off" />
-    <button type="submit" name="submit">Login</button>
+    <div class="buttons">
+        <button type="submit" name="submit">Login</button>
+        <a href="signup.php" class="signup-link">Sign Up</a>
+    </div>
 </form>
 
 <?php
