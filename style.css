@@ -264,16 +264,25 @@ button.close:hover {
     cursor: pointer;
 }
 
-.signup input {
+.signup input,
+.login input {
     width: 50%;
     float: left;
 }
 
-.signup input:nth-child(odd) {
+.signup input:nth-child(odd),
+.login input:nth-child(odd) {
     width: 49%;
     margin-right: 1%;
 }
 
-.signup input:nth-child(2n) {
+.signup input:nth-child(2n),
+.login input:nth-child(2n) {
     margin-bottom: 1%;
+}
+
+.signup-link {
+    display: block;
+    text-align: center;
+    color: #6ACCF8;
 }
