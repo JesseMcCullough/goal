@@ -263,3 +263,17 @@ button.close:hover {
     float: right;
     cursor: pointer;
 }
+
+.signup input {
+    width: 50%;
+    float: left;
+}
+
+.signup input:nth-child(odd) {
+    width: 49%;
+    margin-right: 1%;
+}
+
+.signup input:nth-child(2n) {
+    margin-bottom: 1%;
+}
