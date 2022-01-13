@@ -83,6 +83,7 @@ input[name="goal"] {
 button.go {
     width: 70px;
     height: 70px;
+    margin-bottom: 0;
 }
 
 button {
