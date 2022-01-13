@@ -38,17 +38,22 @@ h2 {
 }
 
 #logout {
-    font-size: 0.5em;
+    font-size: 1em;
     margin-left: 10px;
     color: #6ACCF8;
     text-decoration: underline;
+    position: absolute;
+    top: -40px;
+    display: block;
+    text-align: right;
+    width: 100%;
 }
 
 .container {
     width: 60%;
     margin: 0 auto;
     margin-top: 25vh;
-    position: relative;;
+    position: relative;
 }
 
 form {
