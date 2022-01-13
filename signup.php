@@ -19,6 +19,7 @@ include_once("includes/header.php");
     <input type="password" name="password" placeholder="Password" autocomplete="off" />
     <div class="buttons">
         <button type="submit" name="submit">Sign Up</button>
+        <a href="login.php">Login</a>
     </div>
 </form>
 

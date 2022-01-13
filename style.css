@@ -279,7 +279,7 @@ button.close:hover {
     margin-bottom: 1%;
 }
 
-.signup-link {
+.buttons a {
     display: block;
     text-align: center;
     color: #6ACCF8;
