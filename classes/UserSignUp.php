@@ -4,11 +4,15 @@ require_once("classes/Database.php");
 
 class UserSignUp {
 
+    private $firstName;
+    private $lastName;
     private $email;
     private $password;
     private $database;
 
-    public function __construct($email, $password) {
+    public function __construct($firstName, $lastName, $email, $password) {
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
         $this->email = $email;
         $this->password = $password;
         $this->database = new Database();
@@ -31,11 +35,15 @@ class UserSignUp {
 
         $hashed_password = password_hash($this->password, PASSWORD_DEFAULT);
 
-        $query = "INSERT INTO users (email, hashed_password) VALUES (?, ?)";
+        $query = "INSERT INTO users (first_name, last_name, email, hashed_password) VALUES (?, ?, ?, ?)";
 
         $statement = $this->database->getConnection()->prepare($query);
-        $statement->bind_param("ss", $this->email, $hashed_password);
+        $statement->bind_param("ssss", $this->firstName, $this->lastName, $this->email, $hashed_password);
         $statement->execute();
+
+        session_start();
+        $id = $statement->insert_id;
+        $_SESSION["user_id"] = $id;
 
         return true;
     }
