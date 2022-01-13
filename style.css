@@ -37,6 +37,13 @@ h2 {
     text-align: center;
 }
 
+#logout {
+    font-size: 0.5em;
+    margin-left: 10px;
+    color: #6ACCF8;
+    text-decoration: underline;
+}
+
 .container {
     width: 60%;
     margin: 0 auto;
@@ -68,9 +75,12 @@ input[name="goal"] {
     color: #9D9D9D;
 }
 
-button {
+button.go {
     width: 70px;
     height: 70px;
+}
+
+button {
     float: left;
     border: none;
     cursor: pointer;

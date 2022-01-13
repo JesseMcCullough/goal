@@ -1,10 +1,19 @@
-<?php include_once("includes/header.php"); ?>
+<?php
 
-<span id="greeting">Hi, Jesse</span>
+include_once("includes/header.php");
+
+if (!isset($_SESSION["user_id"])) {
+    header("Location: login.php");
+    exit();
+}
+
+?>
+
+<span id="greeting">Hi, Jesse <a href="includes/logout.php" id="logout">Logout</a></span>
 <h1>What do you want to accomplish?</h1>
 <form action="edit-goal.php" method="POST">
     <input type="text" name="goal" placeholder="I want to ..." />
-    <button type="submit">Go</button>
+    <button type="submit" class="go">Go</button>
 </form>
 
 <div class="divider"></div>
