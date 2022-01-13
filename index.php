@@ -9,7 +9,8 @@ if (!isset($_SESSION["user_id"])) {
 
 ?>
 
-<span id="greeting">Hi, Jesse <a href="includes/logout.php" id="logout">Logout</a></span>
+<span id="greeting">Hi, Jesse</span>
+<a href="includes/logout.php" id="logout">Logout</a>
 <h1>What do you want to accomplish?</h1>
 <form action="edit-goal.php" method="POST">
     <input type="text" name="goal" placeholder="I want to ..." />
