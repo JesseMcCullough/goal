@@ -23,7 +23,7 @@ if (!isset($_SESSION["user_id"])) {
     <li><div class="color-square" style="background-color: #F6EE00"></div>Education</li>
     <li><div class="color-square" style="background-color: #84D87E"></div>Finance</li>
     <li><div class="color-square" style="background-color: #8000FF"></div>Business</li>
-    <li class="new-category">New Category</li>
+    <li class="new-category-link">New Category</li>
 </ul>
 <span class="sort-by">Sort By</span>
 

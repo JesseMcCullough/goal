@@ -1,5 +1,7 @@
 <?php
 
+include_once("includes/autoloader.php");
+
 if (!isset($_SESSION)) {  
     session_start();
 }
@@ -14,5 +16,14 @@ if (!isset($_SESSION)) {
     <title>Home</title>
 </head>
 <body>
+    <div class="new-category">
+        <div class="overlay"></div>
+        <div class="container">
+            <input type="color" name="category-hex-color" />
+            <input type="text" name="category-name" placeholder="New Category" />
+            <button type="button" class="add-category">Add</button>
+        </div>
+    </div>
+
     <div class="container">
         
