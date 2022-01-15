@@ -1,4 +1,0 @@
-having a big issue with the categories updating when a new one is added while not having to reload the entire page because new steps could have been added. cannot use ajax to load the categories because the databse isnt done uploading the new cateogry by the time the request happens. there might be a way to delay execution
-- got it. sent another http request onloadend.
-
-new issue: we lose the category click events when a new category is added. simply loop through and readd them like you did with the border color for the goal/steps.
