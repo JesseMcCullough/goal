@@ -3,7 +3,7 @@
 <h1>Let's plan this out.</h1>
 
 <div class="goal edit-goal" style="border-color: #ECECEC">
-    <span class="name"><?php echo $_POST["goal"]; ?></span>
+    <input type="text" class="name" value="<?php echo $_POST["goal"]; ?>" />
 </div>
 
 <div class="categories-container">
