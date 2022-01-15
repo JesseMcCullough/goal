@@ -1,5 +1,7 @@
 <?php
 
+include_once("includes/autoloader.php");
+
 if (!isset($_SESSION)) {  
     session_start();
 }
