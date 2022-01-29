@@ -6,6 +6,7 @@ $isNewCategory = isset($_GET["newCategory"]);
 
 ?>
 
+<!-- might need to make this a selection option for the form. -->
 <ul class="categories">
     <?php foreach (Category::getCategories() as $category) :?>
         <li class="category<?php if ($isNewCategory && $category->getName() == $_GET["newCategory"]) { echo " new"; } ?>">

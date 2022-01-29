@@ -1,13 +1,21 @@
-<?php include_once("includes/header.php"); ?>
+<?php
+
+include_once("includes/header.php");
+
+$goalId = $_GET["goalId"];
+$goal = new Goal($goalId);
+
+?>
 
 <h1>You can accomplish anything.</h1>
 
 <div class="goal" style="border-color: #F6EE00">
-    <span class="name">Earn my bachelor's in computer science</span>
-    <span class="date"><img src="images/clock-icon.png" />May 1, 2024</span>
+    <span class="name"><?php echo $goal->getName(); ?></span>
+    <span class="date"><img src="images/clock-icon.png" /><?php echo $goal->getDate(); ?></span>
     <div class="progress">
-        <div class="completion-bar" style="width: 50%"></div>
-        <span class="percent">50%</span>
+        <?php $progressPercentage = $goal->getProgressPercentage(); ?>
+        <div class="completion-bar" style="width: <?php echo $progressPercentage; ?>"></div>
+        <span class="percent"><?php echo $progressPercentage; ?></span>
     </div>
 </div>
 
@@ -21,9 +29,7 @@
 <div class="divider"></div>
 
 <h2>Next Steps</h2> 
-<a href="#" class="add-step">Add Step</a>
 <div class="steps">
-
     <?php include("includes/view-step.php"); ?>
 </div>
 

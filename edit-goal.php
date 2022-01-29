@@ -3,12 +3,10 @@
 <h1>Let's plan this out.</h1>
 
 <div class="goal edit-goal" style="border-color: #ECECEC">
-    <input type="text" class="name" value="<?php echo $_POST["goal"]; ?>" />
+    <input type="text" name="goal" class="name" value="<?php echo $_POST["goal"]; ?>" />
 </div>
 
-<div class="categories-container">
-    <?php include_once("includes/categories.php"); ?>
-</div>
+<?php include_once("includes/categories.php"); ?>
 
 <div class="divider"></div>
 

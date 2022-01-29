@@ -208,13 +208,13 @@ button:hover {
 
 .edit-goal input {
     font-size: 1em;
-    
 }
 
 .step input {
     font-size: 1em;
     float: left;
     width: 50%;
+    border: 1px solid #ECECEC;
 }
 
 .add-step {
@@ -327,6 +327,7 @@ button.close:hover {
 .new-category input[type="text"] {
     width: calc(100% - 10% - 70px);
     float: left;
+    padding-left: 20px;
 }
 
 .new-category button {
