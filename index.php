@@ -19,39 +19,20 @@ if (!isset($_SESSION["user_id"])) {
 
 <div class="divider"></div>
 
-<ul class="categories">
-    <li><div class="color-square" style="background-color: #F6EE00"></div>Education</li>
-    <li><div class="color-square" style="background-color: #84D87E"></div>Finance</li>
-    <li><div class="color-square" style="background-color: #8000FF"></div>Business</li>
-    <li class="new-category-link">New Category</li>
-</ul>
+<?php include_once("includes/categories.php"); ?>
 <span class="sort-by">Sort By</span>
 
-<div class="goal" style="border-color: #F6EE00">
-    <span class="name">Earn my bachelor's degree in computer science</span>
-    <span class="date"><img src="images/clock-icon.png" />May 1, 2024</span>
-    <div class="progress">
-        <div class="completion-bar" style="width: 50%"></div>
-        <span class="percent">50%</span>
-    </div>
-</div>
+<?php
 
-<div class="goal" style="border-color: #8000FF">
-    <span class="name">Generate 10 new customers</span>
-    <span class="date"><img src="images/clock-icon.png" />February 1, 2022</span>
-    <div class="progress">
-        <div class="completion-bar" style="width: 90%"></div>
-        <span class="percent">90%</span>
-    </div>
-</div>
+include("classes/Goal.php");;
 
-<div class="goal" style="border-color: #84D87E">
-    <span class="name">Save $2,000</span>
-    <span class="date"><img src="images/clock-icon.png" />June 1, 2022</span>
-    <div class="progress">
-        <div class="completion-bar" style="width: 5%"></div>
-        <span class="percent">5%</span>
-    </div>
-</div>
+$goals = Goal::getGoals($_SESSION["user_id"]);
+foreach ($goals as $goal) {
+    include("includes/view-goal.php");
+}
+
+?>
+
+<script src="javascript/click-to-view-goal.js"></script>
 
 <?php include_once("includes/footer.php"); ?>

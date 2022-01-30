@@ -44,7 +44,7 @@ class Goal {
     }
 
     public function getCategory() {
-        include($_SERVER["DOCUMENT_ROOT"] . "/goals/git/classes/Category.php");
+        include_once($_SERVER["DOCUMENT_ROOT"] . "/goals/git/classes/Category.php");
         return new Category($this->getCategoryId());
     }
 
@@ -57,6 +57,29 @@ class Goal {
         $statement->execute();
 
         $this->id = $statement->insert_id;
+    }
+
+    public function editGoal($name, $categoryId) {
+        $query = "UPDATE goals SET ";
+        if (isset($name)) {
+            $query .= "name = ? ";
+        }
+
+        if (isset($categoryId)) {
+            $query .= "category_id = ? ";
+        }
+
+        $query .= "WHERE id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        if (isset($name) && isset($categoryId)) {
+            $statement->bind_param("sii", $name, $categoryId, $this->id);
+        } else if (isset($name)) {
+            $statement->bind_param("si", $name, $this->id);
+        } else if (isset($categoryId)) {
+            $statement->bind_param("ii", $categoryId, $this->id);
+        }
+        $statement->execute();
     }
 
     public function addStep($name, $date) {
@@ -119,7 +142,29 @@ class Goal {
     }
 
     public function getProgressPercentage() {
+        if ($this->getStepsTotal() == 0) {
+            return "0%";
+        }
+
         return ceil($this->getStepsCompleted() / $this->getStepsTotal()) * 100 . "%";
+    }
+
+    public function getGoals($userId) {
+        $goals = [];
+        $database = new Database();
+
+        $query = "SELECT id FROM goals WHERE user_id = ?";
+
+        $statement = $database->getConnection()->prepare($query);
+        $statement->bind_param("i", $userId);
+        $statement->execute();
+
+        $result = $statement->get_result();
+        while ($goal = $result->fetch_assoc()) {
+            $goals[] = new Goal($goal["id"]);
+        }
+
+        return $goals;
     }
 
 }

@@ -1,26 +1,11 @@
-<?php
-
-include_once("includes/header.php");
-
-$goalId = $_GET["goalId"];
-$goal = new Goal($goalId);
-$category = $goal->getCategory();
-
-?>
+<?php include_once("includes/header.php"); ?>
 
 <h1>You can accomplish anything.</h1>
 
-<div class="goal view-goal" style="border-color: #<?php echo $category->getHexColor(); ?>">
-    <span class="name"><?php echo $goal->getName(); ?></span>
-    <span class="date"><img src="images/clock-icon.png" /><?php echo $goal->getDate(); ?></span>
-    <div class="progress">
-        <?php $progressPercentage = $goal->getProgressPercentage(); ?>
-        <div class="completion-bar" style="width: <?php echo $progressPercentage; ?>"></div>
-        <span class="percent"><?php echo $progressPercentage; ?></span>
-    </div>
-</div>
-
 <?php
+
+$goalId = $_GET["goalId"];
+include_once("includes/view-goal.php");
 
 $_GET["newCategory"] = $category->getName();
 include_once("includes/categories.php");
@@ -48,5 +33,6 @@ include_once("includes/categories.php");
 </div>
 
 <script src="javascript/edit-category.js"></script>
+<script src="javascript/view-goal-close.js"></script>
 
 <?php include_once("includes/footer.php"); ?>
