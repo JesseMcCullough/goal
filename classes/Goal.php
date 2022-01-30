@@ -43,6 +43,11 @@ class Goal {
         return $result->fetch_assoc()["category_id"];
     }
 
+    public function getCategory() {
+        include($_SERVER["DOCUMENT_ROOT"] . "/goals/git/classes/Category.php");
+        return new Category($this->getCategoryId());
+    }
+
     public function createGoal($name, $categoryId, $userId) {
         // duplicate goals allowed and are up to the user's discretion.
         $query = "INSERT INTO goals (user_id, category_id, name) VALUES (?, ?, ?)";
@@ -72,7 +77,7 @@ class Goal {
 
     public function getSteps() {
         $steps = [];
-        $query = "SELECT name, steps_date, is_completed FROM goal_steps WHERE id = ?";
+        $query = "SELECT name, step_date, is_completed FROM goal_steps WHERE goal_id = ?";
 
         $statement = $this->database->getConnection()->prepare($query);
         $statement->bind_param("i", $this->id);
@@ -80,13 +85,12 @@ class Goal {
 
         $result = $statement->get_result();
         while ($step = $result->fetch_assoc()) {
-            steps.push(
+            $steps[] =
                 [
                     "name" => $step["name"],
-                    "date" => $step["steps_date"],
+                    "date" => $step["step_date"],
                     "isCompleted" => $step["is_completed"]
-                ]
-            );
+                ];
         }
 
         return $steps;

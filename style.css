@@ -202,7 +202,8 @@ button:hover {
     color: #FFFFFF;
 }
 
-.edit-goal {
+.edit-goal,
+.view-goal {
     margin-bottom: 10px;
 }
 

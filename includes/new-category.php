@@ -2,7 +2,11 @@
 
 include_once("../classes/Category.php");
 
-$category = new Category($_GET["categoryName"], $_GET["categoryHexColor"]);
-$category->createCategory();
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+$category = new Category(null);
+$category->createCategory($_GET["categoryName"], $_GET["categoryHexColor"], $_SESSION["user_id"]);
 
 ?>
