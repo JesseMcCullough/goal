@@ -64,8 +64,9 @@ input {
     border: none;
     outline: none;
     background-color: #ECECEC;
-    padding-left: 20px;
-    font-size: 1.25em;
+    /* padding-left: 20px;
+    font-size: 1.25em; */
+    font-size: 1em;
     color: #393939;
 }
 
@@ -81,6 +82,7 @@ button.go {
     width: 70px;
     height: 70px;
     margin-bottom: 0;
+    font-size: 1em;
 }
 
 button {
@@ -153,7 +155,7 @@ button:hover {
     display: flex;
     align-items: center;
     border-left: 5px solid #ECECEC;
-    padding-left: 10px;
+    padding-left: 20px;
     font-size: 1.25em;
     margin-bottom: 40px;
 }
@@ -200,14 +202,20 @@ button:hover {
     color: #FFFFFF;
 }
 
-.edit-goal {
+.edit-goal,
+.view-goal {
     margin-bottom: 10px;
+}
+
+.edit-goal input {
+    font-size: 1em;
 }
 
 .step input {
     font-size: 1em;
     float: left;
     width: 50%;
+    border: 1px solid #ECECEC;
 }
 
 .add-step {
@@ -320,6 +328,7 @@ button.close:hover {
 .new-category input[type="text"] {
     width: calc(100% - 10% - 70px);
     float: left;
+    padding-left: 20px;
 }
 
 .new-category button {

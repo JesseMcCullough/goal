@@ -12,7 +12,7 @@ if (!isset($_SESSION["user_id"])) {
 <span id="greeting">Hi, Jesse</span>
 <a href="includes/logout.php" id="logout">Logout</a>
 <h1>What do you want to accomplish?</h1>
-<form action="edit-goal.php" method="POST">
+<form action="edit-goal.php" method="POST" class="goal">
     <input type="text" name="goal" placeholder="I want to ..." />
     <button type="submit" class="go">Go</button>
 </form>

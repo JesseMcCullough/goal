@@ -1,15 +1,15 @@
 <?php
  
-if (!isset($_GET["step"])) {
-    $step = 1;
-} else {
+ $step = 1;
+
+if (isset($_GET["step"])) {
     $step = htmlspecialchars($_GET["step"]);
 }
 
 $hexColor = "#ECECEC";
 
 if (isset($_GET["hexColor"])) {
-    $hexColor = $_GET["hexColor"];
+    $hexColor = htmlspecialchars($_GET["hexColor"]);
 }
 
 ?>

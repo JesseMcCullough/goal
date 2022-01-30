@@ -3,12 +3,10 @@
 <h1>Let's plan this out.</h1>
 
 <div class="goal edit-goal" style="border-color: #ECECEC">
-    <span class="name"><?php echo $_POST["goal"]; ?></span>
+    <input type="text" name="goal" class="name" value="<?php echo $_POST["goal"]; ?>" />
 </div>
 
-<div class="categories-container">
-    <?php include_once("includes/categories.php"); ?>
-</div>
+<?php include_once("includes/categories.php"); ?>
 
 <div class="divider"></div>
 
@@ -22,6 +20,7 @@
     <button type="button" class="done">Done</button>
 </div>
 
+<script src="javascript/edit-category.js"></script>
 <script src="javascript/edit-goal.js"></script>
 
 <?php include_once("includes/footer.php"); ?>
