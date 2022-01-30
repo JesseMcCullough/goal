@@ -1,4 +1,4 @@
-let goals = document.querySelectorAll(".goal");
+let goals = document.querySelectorAll(".goal.click");
 for (let goal of goals) {
     goal.addEventListener("click", function() {
         onClickToViewGoal(goal);
