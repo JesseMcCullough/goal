@@ -4,6 +4,9 @@
 
 <div class="goal edit-goal" style="border-color: #ECECEC">
     <input type="text" name="goal" class="name" value="<?php echo $_POST["goal"]; ?>" />
+    <?php if (!empty($_POST["categoryIdPreselect"])) : ?>
+        <input type="hidden" name="categoryIdPreselect" value="<?php echo $_POST["categoryIdPreselect"]; ?>" />
+    <?php endif; ?>
 </div>
 
 <?php include_once("includes/categories.php"); ?>
@@ -20,7 +23,8 @@
     <button type="button" class="done">Done</button>
 </div>
 
-<script src="javascript/edit-category.js"></script>
+<script src="javascript/select-category.js"></script>
+<script src="javascript/new-category.js"></script>
 <script src="javascript/edit-goal.js"></script>
 
 <?php include_once("includes/footer.php"); ?>

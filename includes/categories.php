@@ -8,6 +8,11 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+$isNewCategoryAllowed = true;
+if (isset($_GET["showNewCategory"])) {
+    $isNewCategoryAllowed = filter_var($_GET["showNewCategory"], FILTER_VALIDATE_BOOLEAN);
+}
+
 ?>
 
 <!-- might need to make this a selection option for the form. -->
@@ -19,5 +24,7 @@ if (!isset($_SESSION)) {
             <span <?php if ($isNewCategory && $currentCategory->getName() == $_GET["newCategory"]) { echo "class=\"active\""; }?>><?php echo $currentCategory->getName(); ?></span>
         </li>
     <?php endforeach; ?>
-    <li class="new-category-link">New Category</li>
+    <?php if ($isNewCategoryAllowed) :?>
+        <li class="new-category-link">New Category</li>
+    <?php endif; ?>
 </ul>

@@ -32,7 +32,8 @@ include_once("includes/categories.php");
     <button type="button" class="close">Close</button>
 </div>
 
-<script src="javascript/edit-category.js"></script>
+<script src="javascript/select-category.js"></script>
+<script src="javascript/new-category.js"></script>
 <script src="javascript/view-goal-close.js"></script>
 
 <?php include_once("includes/footer.php"); ?>

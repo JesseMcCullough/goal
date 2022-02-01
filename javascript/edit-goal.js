@@ -6,6 +6,8 @@ addStep.addEventListener("click", onClickAddStep);
 let done = document.querySelector(".done");
 done.addEventListener("click", onClickDone);
 
+applyCategoryIdPreselect();
+
 /**
  * Adds a new step input when the add step button is clicked.
  */
@@ -85,4 +87,13 @@ function onClickDone() {
         newGoalRequest.send();
     }
 
+}
+
+function applyCategoryIdPreselect() {
+    let categoryIdInput = document.querySelector("input[name='categoryIdPreselect']");
+    if (categoryIdInput) {
+        let categoryId = categoryIdInput.value;
+        let category = document.querySelector(".category[data-category-id='" + categoryId + "']");
+        setActiveCategory(category);
+    }
 }
