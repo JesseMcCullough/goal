@@ -27,10 +27,8 @@ function setActiveCategory(category, ignoreDeselect) {
     categoryId = category.dataset.categoryId;
 
     if (ignoreDeselect) {
-        console.log("Ignoring");
         isCategoryDeselected = false;
     } else {
-        console.log("Validating");
         isCategoryDeselected = categorySpan.classList.contains("active");
     }
 
@@ -42,9 +40,7 @@ function setActiveCategory(category, ignoreDeselect) {
     isCategoryChangedWhileViewingGoal = window.location.pathname.includes("view-goal.php");
 
     removeActiveCategory();
-
-    console.log("Setting " + category);
-    console.log("isCategoryDeselected: " + isCategoryDeselected);
+    
     if (!isCategoryDeselected || ignoreDeselect) {
         category.querySelector("span").classList.add("active");
         hexColor = category.querySelector(".color-square").style.backgroundColor;
