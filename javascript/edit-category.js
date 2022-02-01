@@ -9,6 +9,8 @@ newCategoryPopupOverlay.addEventListener("click", onClickNewCategoryPopupOverlay
 let newCategoryAddButton = document.querySelector(".new-category .add-category");
 newCategoryAddButton.addEventListener("click", onClickNewCategoryAddButton);
 
+let isCategoryChangedWhileViewingGoal = false;
+
 addOnClickEventToNewCategoryLink();
 addOnClickEventToAllCategories();
 
@@ -99,6 +101,7 @@ function setActiveCategory(category) {
     category.querySelector("span").classList.add("active");
     hexColor = category.querySelector(".color-square").style.backgroundColor;
     categoryId = category.dataset.categoryId;
+    isCategoryChangedWhileViewingGoal = window.location.pathname.includes("view-goal.php");
     // add color to all goal classes
 
     let goalElements = document.querySelectorAll(".goal");
@@ -115,5 +118,4 @@ function removeActiveCategory() {
     for (let category of categories) {
         category.querySelector("span").classList.remove("active");
     }
-
 }
