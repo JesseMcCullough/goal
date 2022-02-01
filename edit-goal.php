@@ -20,7 +20,8 @@
     <button type="button" class="done">Done</button>
 </div>
 
-<script src="javascript/edit-category.js"></script>
+<script src="javascript/select-category.js"></script>
+<script src="javascript/new-category.js"></script>
 <script src="javascript/edit-goal.js"></script>
 
 <?php include_once("includes/footer.php"); ?>

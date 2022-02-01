@@ -14,7 +14,9 @@ $category = $goal->getCategory();
 ?>
 
 <div class="goal<?php if (isset($_GET["goalId"])) { echo " view-goal"; } else { echo " click"; } ?>" style="border-color: #<?php echo $category->getHexColor(); ?>"
-    data-goal-id="<?php echo $goalId; ?>">
+    data-goal-id="<?php echo $goalId; ?>"
+    data-category-id="<?php echo $category->getId(); ?>"
+    data-category-hex-color="#<?php echo $category->getHexColor(); ?>">
     <span class="name"><?php echo $goal->getName(); ?></span>
     <span class="date"><img src="images/clock-icon.png" /><?php echo $goal->getDate(); ?></span>
     <div class="progress">
