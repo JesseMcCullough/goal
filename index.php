@@ -26,7 +26,6 @@ $_GET["showNewCategory"] = false;
 include_once("includes/categories.php");
 
 ?>
-<span class="sort-by">Sort By</span>
 
 <div class="goals">
     <?php
