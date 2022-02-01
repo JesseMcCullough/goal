@@ -1,9 +1,23 @@
-<?php include_once("includes/header.php"); ?>
+<?php
+
+include_once("includes/header.php");
+
+$goalName = null;
+$goal = null;
+if (isset($_POST["goalId"])) {
+    $goal = new Goal($_POST["goalId"]);
+    $goalName = $goal->getName();
+} else {
+    $goalName = $_POST["goal"];
+}
+
+?>
 
 <h1>Let's plan this out.</h1>
 
 <div class="goal edit-goal" style="border-color: #ECECEC">
-    <input type="text" name="goal" class="name" value="<?php echo $_POST["goal"]; ?>" />
+    <input type="text" name="goal" class="name" value="<?php echo $goalName; ?>"
+    <?php if (isset($_POST["goalId"])) { ?>data-goal-id="<?php echo $_POST["goalId"]; } ?>" />
     <?php if (!empty($_POST["categoryIdPreselect"])) : ?>
         <input type="hidden" name="categoryIdPreselect" value="<?php echo $_POST["categoryIdPreselect"]; ?>" />
     <?php endif; ?>
@@ -16,7 +30,21 @@
 <h2>Next Steps</h2> 
 <a href="#" class="add-step">Add Step</a>
 <div class="steps">
-    <?php include("includes/new-step.php"); ?>
+    <?php
+    
+    if (isset($_POST["steps"])) {
+        $steps = json_decode($_POST["steps"], true);
+        foreach ($steps as $step) {
+            $_GET["stepName"] = $step["name"];
+            $_GET["date"] = $step["date"];
+            $_GET["hexColor"] = $goal->getCategory()->getHexColor();
+            include("includes/new-step.php");
+        }
+    } else {
+        include("includes/new-step.php");
+    }
+    
+    ?>
 </div>
 
 <div class="buttons">

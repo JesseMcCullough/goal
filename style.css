@@ -92,7 +92,7 @@ button {
     background-color: #6ACCF8;
     color: #FFFFFF;
     font-size: 1.25em;
-    transition: background-color 0.4s, color 0.4s;
+    transition: background-color 0.4s, color 0.4s, border-color 0.4s;
 }
 
 button:hover {
@@ -240,11 +240,14 @@ button {
 }
 
 button.close {
-    background-color: #FF7E7E;
+    background: none;
+    border: 2px solid #FF7E7E;
+    color: #FF7E7E;
 }
 
 button.close:hover {
-    background-color: #E56B6B;
+    border-color: #BD5858;
+    color: #BD5858;
 }
 
 .buttons {
@@ -348,4 +351,8 @@ button.close:hover {
 
 .hidden {
     display: none;
+}
+
+.view-goal-edit {
+    display: inline;
 }

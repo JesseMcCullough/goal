@@ -16,3 +16,7 @@ if (isset($_GET["categoryId"])) {
 
 $goal = new Goal($goalId);
 $goal->editGoal($name, $categoryId);
+
+// add support for editing steps.
+
+echo $goalId;

@@ -30,6 +30,12 @@ include_once("includes/categories.php");
 
 <div class="buttons">
     <button type="button" class="close">Close</button>
+    <form action="edit-goal.php" method="POST" class="view-goal-edit">
+        <input type="hidden" name="goalId" value="<?php echo $goalId; ?>" />
+        <input type="hidden" name="categoryIdPreselect" value="<?php echo $category->getId(); ?>" />
+        <input type="hidden" name="steps" value='<?php echo json_encode($goal->getSteps()); ?>' ?>
+        <button type="submit" class="edit">Edit</button>
+    </form>
 </div>
 
 <script src="javascript/select-category.js"></script>

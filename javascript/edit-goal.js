@@ -27,8 +27,8 @@ function onClickAddStep() {
 
 function onClickDone() {
      // get goal name
-    let goal = document.querySelector(".goal input[name='goal']").value;
-    console.log(goal);
+    let goal = document.querySelector(".goal input[name='goal']");
+    let goalName = goal.value;
 
     let isValidGoal = true;
     let steps = [];
@@ -71,20 +71,29 @@ function onClickDone() {
     }
 
     if (isValidGoal) {
-        // Request a new goal to be created.
-        let requestUrl = "includes/new-goal.php?categoryId=" + categoryId
-        + "&goal=" + encodeURIComponent(goal)
-        + "&steps=" + JSON.stringify(steps);
+        let requestUrl = null;
 
-        let newGoalRequest = new XMLHttpRequest();
-        newGoalRequest.open("GET", requestUrl, true);
-        newGoalRequest.onloadend = function() {
+        let isExistingGoal = goal.hasAttribute("data-goal-id");
+        if (isExistingGoal) {
+            let goalId = goal.dataset.goalId;
+            requestUrl = "includes/edit-goal.php?goalId=" + goalId + "&categoryId=" + categoryId;
+        } else {
+        // Request a new goal to be created.
+            requestUrl = "includes/new-goal.php?categoryId=" + categoryId
+                    + "&goal=" + encodeURIComponent(goalName)
+                    + "&steps=" + JSON.stringify(steps);
+        }
+
+
+        let goalRequest = new XMLHttpRequest();
+        goalRequest.open("GET", requestUrl, true);
+        goalRequest.onloadend = function() {
             if (this.status == 200) {
                 let goalId = this.responseText;
                 location.href = "view-goal.php?goalId=" + goalId;
             }
         };
-        newGoalRequest.send();
+        goalRequest.send();
     }
 
 }
