@@ -98,9 +98,17 @@ class Goal {
         $statement->execute();
     }
 
+    public function editStep($name, $date, $stepId) {
+        $query = "UPDATE goal_steps SET name = ?, step_date = ? WHERE id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        $statement->bind_param("ssi", $name, $date, $stepId);
+        $statement->execute();
+    }
+
     public function getSteps() {
         $steps = [];
-        $query = "SELECT name, step_date, is_completed FROM goal_steps WHERE goal_id = ?";
+        $query = "SELECT id, name, step_date, is_completed FROM goal_steps WHERE goal_id = ?";
 
         $statement = $this->database->getConnection()->prepare($query);
         $statement->bind_param("i", $this->id);
@@ -110,6 +118,7 @@ class Goal {
         while ($step = $result->fetch_assoc()) {
             $steps[] =
                 [
+                    "id" => $step["id"],
                     "name" => $step["name"],
                     "date" => $step["step_date"],
                     "isCompleted" => $step["is_completed"]
