@@ -25,11 +25,23 @@ if (isset($_GET["steps"])) {
         $step = $steps[$x];
 
         if (count($step) == 3) {
-            $goal->editStep($step[0], $step[1], $step[2]);
+            $name = $step[0];
+            $date = $step[1];
+
+            if ($name == null && $date == null) {
+                $goal->deleteStep($step[2]);
+            } else {
+                $goal->editStep($step[0], $step[1], $step[2]);
+            }
         } else {
             $goal->addStep($step[0], $step[1]);
         }
     }
+}
+
+if ($goal->getStepsTotal() == 0) {
+    $goal->deleteGoal();
+    $goalId = null;
 }
 
 echo $goalId;

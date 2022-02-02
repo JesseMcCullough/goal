@@ -61,14 +61,13 @@ class Goal {
 
     public function editGoal($name, $categoryId) {
         $query = "UPDATE goals SET ";
-        if (isset($name)) {
-            $query .= "name = ? ";
-        }
-
-        if (isset($categoryId)) {
+        if (isset($name) && isset($categoryId)) {
+            $query .= "name = ?, category_id = ? ";
+        } else if (isset($name)) {
+            $query .= "name = ? " ;
+        } else if (isset($categoryId)) {
             $query .= "category_id = ? ";
         }
-
         $query .= "WHERE id = ?";
 
         $statement = $this->database->getConnection()->prepare($query);
@@ -79,6 +78,20 @@ class Goal {
         } else if (isset($categoryId)) {
             $statement->bind_param("ii", $categoryId, $this->id);
         }
+        $statement->execute();
+    }
+
+    public function deleteGoal() {
+        $query = "DELETE FROM goals WHERE id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        $statement->bind_param("i", $this->id);
+        $statement->execute();
+
+        $query = "DELETE FROM goal_steps WHERE goal_id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        $statement->bind_param("i", $this->id);
         $statement->execute();
     }
 
@@ -103,6 +116,22 @@ class Goal {
 
         $statement = $this->database->getConnection()->prepare($query);
         $statement->bind_param("ssi", $name, $date, $stepId);
+        $statement->execute();
+    }
+
+    public function deleteStep($stepId) {
+        $query = "DELETE FROM goal_steps WHERE id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        $statement->bind_param("i", $stepId);
+        $statement->execute();
+
+        // Update goal steps count.
+        $newStepsTotal = $this->getStepsTotal() - 1;
+        $query = "UPDATE goals SET steps_total = ? WHERE id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        $statement->bind_param("ii", $newStepsTotal, $this->id);
         $statement->execute();
     }
 
