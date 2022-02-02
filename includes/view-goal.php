@@ -18,7 +18,7 @@ $category = $goal->getCategory();
     data-category-id="<?php echo $category->getId(); ?>"
     data-category-hex-color="#<?php echo $category->getHexColor(); ?>">
     <span class="name"><?php echo $goal->getName(); ?></span>
-    <span class="date"><img src="images/clock-icon.png" /><?php echo $goal->getDate(); ?></span>
+    <span class="date"><img src="images/clock-icon.png" /><?php echo $goal->getDateFormatted(); ?></span>
     <div class="progress">
         <?php $progressPercentage = $goal->getProgressPercentage(); ?>
         <div class="completion-bar" style="width: <?php echo $progressPercentage; ?>"></div>

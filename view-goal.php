@@ -21,7 +21,7 @@ include_once("includes/categories.php");
     foreach ($goal->getSteps() as $step) {
         $_GET["id"] = $step["id"];
         $_GET["name"] = $step["name"];
-        $_GET["date"] = $step["date"];
+        $_GET["date"] = $step["dateFormatted"];
         $_GET["hexColor"] = $category->getHexColor();
         include("includes/view-step.php");
     }
