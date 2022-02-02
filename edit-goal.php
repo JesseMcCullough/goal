@@ -34,7 +34,10 @@ if (isset($_POST["goalId"])) {
     
     if (isset($_POST["steps"])) {
         $steps = json_decode($_POST["steps"], true);
+        $stepCounter = 1;
         foreach ($steps as $step) {
+            $_GET["step"] = $stepCounter++;
+            $_GET["id"] = $step["id"];
             $_GET["stepName"] = $step["name"];
             $_GET["date"] = $step["date"];
             $_GET["hexColor"] = $goal->getCategory()->getHexColor();

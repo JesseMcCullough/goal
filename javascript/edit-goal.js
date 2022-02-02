@@ -1,4 +1,4 @@
-let step = 1;
+let step = document.querySelectorAll(".steps .goal.step").length;
 let steps = document.querySelector(".steps");
 let addStep = document.querySelector(".add-step");
 addStep.addEventListener("click", onClickAddStep);
@@ -36,11 +36,13 @@ function onClickDone() {
     for (let x = 1; x <= step; x++) {
         let isValidStep = true;
 
+        let step = document.querySelector(".goal.step-" + x);
         let stepName = document.querySelector("input[name='step-" + x);
         let stepDate = document.querySelector("input[name='step-" + x + "-date");
 
         let hasName = stepName.value !== "";
         let hasDate = stepDate.value !== "";
+        let hasId = step.hasAttribute("data-step-id");
         if (hasName || hasDate) {
             if (!hasName) {
                 stepName.style.borderColor = "#FF0000";
@@ -64,8 +66,11 @@ function onClickDone() {
 
             if (isValidStep) {
                 // valid entry.
-                console.log("Putting in " + stepName.value + " and " + stepDate.value);
-                steps.push([stepName.value, stepDate.value]);
+                if (hasId) {
+                    steps.push([stepName.value, stepDate.value, step.dataset.stepId]);
+                } else {
+                    steps.push([stepName.value, stepDate.value]);
+                }
             }
         }
     }
@@ -75,15 +80,17 @@ function onClickDone() {
 
         let isExistingGoal = goal.hasAttribute("data-goal-id");
         if (isExistingGoal) {
+            // Request an existsing goal to be updated.
             let goalId = goal.dataset.goalId;
-            requestUrl = "includes/edit-goal.php?goalId=" + goalId + "&categoryId=" + categoryId;
+            requestUrl = "includes/edit-goal.php?goalId=" + goalId
+                    + "&categoryId=" + categoryId
+                    + "&steps=" + JSON.stringify(steps);
         } else {
-        // Request a new goal to be created.
+            // Request a new goal to be created.
             requestUrl = "includes/new-goal.php?categoryId=" + categoryId
                     + "&goal=" + encodeURIComponent(goalName)
                     + "&steps=" + JSON.stringify(steps);
         }
-
 
         let goalRequest = new XMLHttpRequest();
         goalRequest.open("GET", requestUrl, true);
@@ -106,3 +113,4 @@ function applyCategoryIdPreselect() {
         setActiveCategory(category);
     }
 }
+

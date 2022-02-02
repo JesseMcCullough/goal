@@ -12,7 +12,7 @@ $goal = new Goal(null);
 $goal->createGoal($goalName, $categoryId, $_SESSION["user_id"]);
 
 for ($x = 0; $x < count($steps); $x++) {
-    // [$x][0] = name, [$x][1] = date.
+    // [$x][0] = name, [$x][1] = date, [$x][2] = optional id
     $goal->addStep($steps[$x][0], $steps[$x][1]);
 }
 

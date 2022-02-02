@@ -18,5 +18,18 @@ $goal = new Goal($goalId);
 $goal->editGoal($name, $categoryId);
 
 // add support for editing steps.
+if (isset($_GET["steps"])) {
+    $steps = json_decode($_GET["steps"]);
+    for ($x = 0; $x < count($steps); $x++) {
+        // [$x][0] = name, [$x][1] = date, [$x][2] = optional id
+        $step = $steps[$x];
+
+        if (count($step) == 3) {
+            $goal->editStep($step[0], $step[1], $step[2]);
+        } else {
+            $goal->addStep($step[0], $step[1]);
+        }
+    }
+}
 
 echo $goalId;
