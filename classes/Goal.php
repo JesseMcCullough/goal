@@ -29,7 +29,26 @@ class Goal {
     }
 
     public function getDate() {
-        return "January 28, 2022"; // return latest goal step date.
+        $query = "SELECT step_date FROM goal_steps WHERE goal_id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        $statement->bind_param("i", $this->id);
+        $statement->execute();
+        
+        $result = $statement->get_result();
+        $latestDate = null;
+        while ($row = $result->fetch_assoc()) {
+            $date = $row["step_date"];
+            if ($date > $latestDate || $latestDate == null) {
+                $latestDate = $date;
+            }
+        }
+        
+        return $latestDate;
+    }
+
+    public function getDateFormatted() {
+        return $this->formatDate($this->getDate());
     }
 
     public function getCategoryId() {
@@ -150,6 +169,7 @@ class Goal {
                     "id" => $step["id"],
                     "name" => $step["name"],
                     "date" => $step["step_date"],
+                    "dateFormatted" => $this->formatDate($step["step_date"]),
                     "isCompleted" => $step["is_completed"]
                 ];
         }
@@ -203,6 +223,11 @@ class Goal {
         }
 
         return $goals;
+    }
+
+    private function formatDate($date) {
+        $dateObj = date_create($date);
+        return date_format($dateObj, "F j, Y");
     }
 
 }

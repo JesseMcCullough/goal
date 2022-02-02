@@ -175,6 +175,17 @@ button:hover {
 .goal .date {
     width: 20%;
     float: left;
+    font-family: Arial;
+}
+
+input[type="date"] {
+    color: #9D9D9D;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
 }
 
 .goal .progress {

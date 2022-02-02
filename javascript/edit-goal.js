@@ -7,6 +7,7 @@ let done = document.querySelector(".done");
 done.addEventListener("click", onClickDone);
 
 applyCategoryIdPreselect();
+applyDateInputEvents();
 
 /**
  * Adds a new step input when the add step button is clicked.
@@ -20,6 +21,7 @@ function onClickAddStep() {
     newStepRequest.onload = function() {
         if (this.status == 200) {
             steps.insertAdjacentHTML("afterbegin", this.responseText);
+            applyDateInputEvents();
         }
     };
     newStepRequest.send();
@@ -128,3 +130,15 @@ function applyCategoryIdPreselect() {
     }
 }
 
+function applyDateInputEvents() {
+    let dateInputs = document.querySelectorAll(".date");
+    for (let dateInput of dateInputs) {
+        dateInput.addEventListener("input", function() {
+            dateInput.style.color = "#393939";
+        });
+
+        dateInput.addEventListener("click", function() {
+            dateInput.style.color = "#393939";
+        });
+    }
+}
