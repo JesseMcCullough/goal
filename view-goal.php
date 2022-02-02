@@ -23,6 +23,7 @@ include_once("includes/categories.php");
         $_GET["name"] = $step["name"];
         $_GET["date"] = $step["dateFormatted"];
         $_GET["hexColor"] = $category->getHexColor();
+        $_GET["isCompleted"] = $step["isCompleted"];
         include("includes/view-step.php");
     }
     
@@ -41,6 +42,7 @@ include_once("includes/categories.php");
 
 <script src="javascript/select-category.js"></script>
 <script src="javascript/new-category.js"></script>
+<script src="javascript/step-checkbox.js"></script>
 <script src="javascript/view-goal-close.js"></script>
 
 <?php include_once("includes/footer.php"); ?>
