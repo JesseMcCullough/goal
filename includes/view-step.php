@@ -4,6 +4,7 @@ $id = $_GET["id"];
 $name = $_GET["name"];
 $date = $_GET["date"];
 $hexColor = $_GET["hexColor"];
+$isCompleted = $_GET["isCompleted"];
 
 ?>
 
@@ -11,6 +12,6 @@ $hexColor = $_GET["hexColor"];
     <span class="name"><?php echo $name; ?></span>
     <span class="date"><img src="images/clock-icon.png" /><?php echo $date; ?></span>
     <div class="container">
-        <div class="checkbox"></div>
+        <div class="checkbox<?php if ($isCompleted) { echo " checked"; } ?>"></div>
     </div>
 </div>

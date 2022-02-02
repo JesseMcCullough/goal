@@ -154,6 +154,31 @@ class Goal {
         $statement->execute();
     }
 
+    public function setStepIsCompleted($isCompleted, $stepId) {
+        $isCompleted = filter_var($isCompleted, FILTER_VALIDATE_BOOLEAN);
+        $intIsCompleted = boolval($isCompleted);
+
+        $query = "UPDATE goal_steps SET is_completed = ? WHERE id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        $statement->bind_param("ii", $intIsCompleted, $stepId);
+        $statement->execute();
+
+        // Update goal steps count.
+        $newStepsCompleted = $this->getStepsCompleted();
+        if ($isCompleted) {
+            $newStepsCompleted++;
+        } else {
+            $newStepsCompleted--;
+        }
+
+        $query = "UPDATE goals SET steps_completed = ? WHERE id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        $statement->bind_param("ii", $newStepsCompleted, $this->id);
+        $statement->execute();
+    }
+
     public function getSteps() {
         $steps = [];
         $query = "SELECT id, name, step_date, is_completed FROM goal_steps WHERE goal_id = ?";
@@ -204,7 +229,7 @@ class Goal {
             return "0%";
         }
 
-        return ceil($this->getStepsCompleted() / $this->getStepsTotal()) * 100 . "%";
+        return ceil($this->getStepsCompleted() / $this->getStepsTotal() * 100) . "%";
     }
 
     public function getGoals($userId) {
