@@ -28,7 +28,7 @@ function onClickAddStep() {
 function onClickDone() {
      // get goal name
     let goal = document.querySelector(".goal input[name='goal']");
-    let goalName = goal.value;
+    let goalName = goal.value.trim();
 
     let isValidGoal = true;
     let steps = [];
@@ -72,6 +72,10 @@ function onClickDone() {
                     steps.push([stepName.value, stepDate.value]);
                 }
             }
+        } else {
+            if (hasId) {
+                steps.push([null, null, step.dataset.stepId]);
+            }
         }
     }
 
@@ -80,11 +84,17 @@ function onClickDone() {
 
         let isExistingGoal = goal.hasAttribute("data-goal-id");
         if (isExistingGoal) {
-            // Request an existsing goal to be updated.
             let goalId = goal.dataset.goalId;
-            requestUrl = "includes/edit-goal.php?goalId=" + goalId
-                    + "&categoryId=" + categoryId
-                    + "&steps=" + JSON.stringify(steps);
+            if (goalName != "") {
+                // Request an existing goal to be updated.
+                requestUrl = "includes/edit-goal.php?goalId=" + goalId
+                        + "&name=" + encodeURIComponent(goalName)
+                        + "&categoryId=" + categoryId
+                        + "&steps=" + JSON.stringify(steps);
+            } else {
+                // Request an existing goal to be deleted.
+                requestUrl = "includes/delete-goal.php?goalId=" + goalId;
+            }
         } else {
             // Request a new goal to be created.
             requestUrl = "includes/new-goal.php?categoryId=" + categoryId
@@ -97,7 +107,11 @@ function onClickDone() {
         goalRequest.onloadend = function() {
             if (this.status == 200) {
                 let goalId = this.responseText;
-                location.href = "view-goal.php?goalId=" + goalId;
+                if (goalId) {
+                    location.href = "view-goal.php?goalId=" + goalId;  
+                } else {
+                    location.href = "index.php";
+                }
             }
         };
         goalRequest.send();
