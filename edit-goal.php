@@ -23,7 +23,7 @@ if (isset($_POST["goalId"])) {
     <?php endif; ?>
 </div>
 
-<?php include("includes/categories.php"); ?>
+<?php include("includes/category/categories.php"); ?>
 
 <div class="divider"></div>
 
@@ -41,10 +41,10 @@ if (isset($_POST["goalId"])) {
             $_GET["stepName"] = $step["name"];
             $_GET["date"] = $step["date"];
             $_GET["hexColor"] = $goal->getCategory()->getHexColor();
-            include("includes/new-step.php");
+            include("includes/step/new-step.php");
         }
     } else {
-        include("includes/new-step.php");
+        include("includes/step/new-step.php");
     }
     
     ?>

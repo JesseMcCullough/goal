@@ -5,10 +5,10 @@
 <?php
 
 $goalId = $_GET["goalId"];
-include_once("includes/view-goal.php");
+include_once("includes/goal/view-goal.php");
 
 $_GET["newCategory"] = $category->getName();
-include("includes/categories.php");
+include("includes/category/categories.php");
 
 ?>
 
@@ -24,7 +24,7 @@ include("includes/categories.php");
         $_GET["date"] = $step["dateFormatted"];
         $_GET["hexColor"] = $category->getHexColor();
         $_GET["isCompleted"] = $step["isCompleted"];
-        include("includes/view-step.php");
+        include("includes/step/view-step.php");
     }
     
     ?>

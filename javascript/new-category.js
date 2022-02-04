@@ -49,11 +49,11 @@ function onClickNewCategoryAddButton() {
     let requestUrl = null;
     if (categoryId == -1) {
         // Request a new category to be created.
-        requestUrl = "includes/new-category.php?categoryName=" + encodeURIComponent(categoryNameElement.value)
+        requestUrl = "includes/category/new-category.php?categoryName=" + encodeURIComponent(categoryNameElement.value)
                 + "&categoryHexColor=" + categoryHexColor.value.replace("#", "");
     } else {
         // Request an existing category to be updated.
-        requestUrl = "includes/edit-category.php?categoryId=" + categoryId
+        requestUrl = "includes/category/edit-category.php?categoryId=" + categoryId
                 + "&categoryHexColor=" + categoryHexColor.value.replace("#", "");
         if (categoryNameElement.value != "") {
             requestUrl += "&categoryName=" + encodeURIComponent(categoryNameElement.value)

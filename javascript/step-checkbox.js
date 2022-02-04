@@ -7,7 +7,7 @@ for (let step of steps) {
         let isCompleted = checkbox.classList.contains("checked");
 
         let goalRequest = new XMLHttpRequest();
-        let requestUrl = "includes/edit-step-completion.php?goalId=" + goalId
+        let requestUrl = "includes/step/edit-step-completion.php?goalId=" + goalId
                 + "&stepId=" + step.dataset.stepId
                 + "&isCompleted=" + isCompleted;
                 

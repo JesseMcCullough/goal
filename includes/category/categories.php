@@ -30,7 +30,8 @@ if (isset($_GET["showNewCategory"])) {
     <?php endforeach; ?>
     <?php if ($isNewCategoryAllowed) :?>
         <li class="new-category-link">Edit Categories</li>
-    <?php endif; ?>
+    <?php echo $isNewCategoryAllowed; endif; ?>
+    
 </ul>
 
 <?php 

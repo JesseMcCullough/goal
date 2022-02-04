@@ -18,7 +18,7 @@ if (!isset($_SESSION["user_id"])) {
     <button type="submit" class="go">Go</button>
 </form>
 
-<?php include("includes/categories.php"); ?>
+<?php include("includes/category/categories.php"); ?>
 
 <div class="divider"></div>
 
@@ -29,7 +29,7 @@ if (!isset($_SESSION["user_id"])) {
 
     $goals = Goal::getGoals($_SESSION["user_id"]);
     foreach ($goals as $goal) {
-        include("includes/view-goal.php");
+        include("includes/goal/view-goal.php");
     }
 
     ?>

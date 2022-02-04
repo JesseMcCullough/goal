@@ -1,6 +1,6 @@
 <?php
 
-include_once("../classes/Goal.php");
+include_once("../../classes/Goal.php");
 
 session_start();
 

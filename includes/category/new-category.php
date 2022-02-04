@@ -1,6 +1,6 @@
 <?php
 
-include_once("../classes/Category.php");
+include_once("../../classes/Category.php");
 
 if (!isset($_SESSION)) {
     session_start();

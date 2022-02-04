@@ -1,6 +1,6 @@
 <?php
 
-include_once("../classes/Category.php");
+include_once("../../classes/Category.php");
 
 $categoryId = $_GET["categoryId"];
 
@@ -24,7 +24,7 @@ if ($name == null) {
         session_start();
     }
 
-    include_once("../classes/Goal.php");
+    include_once("../../classes/Goal.php");
 
     foreach (Goal::getGoals($_SESSION["user_id"]) as $goal) {
         if ($goal->getCategoryId() == $categoryId) {
