@@ -39,7 +39,7 @@ class Category {
     }
 
     public function createCategory($name, $hexColor, $userId) {
-        $query = "SELECT name FROM categories WHERE name = ? AND user_id = ?";
+        $query = "SELECT id, name FROM categories WHERE name = ? AND user_id = ?";
 
         $statement = $this->database->getConnection()->prepare($query);
         $statement->bind_param("si", $name, $userId);
@@ -49,7 +49,7 @@ class Category {
 
         // If the category exists
         if ($result->num_rows > 0) {
-            echo "Category exists";
+            $this->id = $result->fetch_assoc()["id"];
             return false;
         }
         // Category does not exist. Create category.
@@ -63,6 +63,36 @@ class Category {
         $this->id = $statement->insert_id;
 
         return true;
+    }
+
+    public function editCategory($name, $hexColor) {
+        $query = "UPDATE categories SET ";
+        if (isset($name) && isset($hexColor)) {
+            $query .= "name = ?, hex_color = ? ";
+        } else if (isset($name)) {
+            $query .= "name = ? " ;
+        } else if (isset($hexColor)) {
+            $query .= "hex_color = ? ";
+        }
+        $query .= "WHERE id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        if (isset($name) && isset($hexColor)) {
+            $statement->bind_param("ssi", $name, $hexColor, $this->id);
+        } else if (isset($name)) {
+            $statement->bind_param("si", $name, $this->id);
+        } else if (isset($hexColor)) {
+            $statement->bind_param("si", $hexColor, $this->id);
+        }
+        $statement->execute();
+    }
+
+    public function deleteCategory() {
+        $query = "DELETE FROM categories WHERE id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        $statement->bind_param("i", $this->id);
+        $statement->execute();
     }
 
     public static function getCategories($userId) {

@@ -23,7 +23,7 @@ if (isset($_POST["goalId"])) {
     <?php endif; ?>
 </div>
 
-<?php include_once("includes/categories.php"); ?>
+<?php include("includes/categories.php"); ?>
 
 <div class="divider"></div>
 
@@ -54,8 +54,10 @@ if (isset($_POST["goalId"])) {
     <button type="button" class="done">Done</button>
 </div>
 
-<script src="javascript/select-category.js"></script>
-<script src="javascript/new-category.js"></script>
-<script src="javascript/edit-goal.js"></script>
+<?php
 
-<?php include_once("includes/footer.php"); ?>
+addJavaScript("edit-goal");
+
+include_once("includes/footer.php");
+
+?>

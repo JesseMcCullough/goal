@@ -217,6 +217,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
 }
 
+form.goal,
 .edit-goal,
 .view-goal {
     margin-bottom: 10px;
@@ -338,6 +339,16 @@ button.close:hover {
 
 .new-category .container {
     z-index: 102;
+    overflow: hidden;
+    background: #FFFFFF;
+    padding: 20px;
+}
+
+.new-category .title {
+    display: block;
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 20px;
 }
 
 .new-category input[type="color"] {
@@ -358,6 +369,15 @@ button.close:hover {
     width: 70px;
     height: 70px;
     float: left;
+    margin: 0;
+}
+
+.new-category .categories {
+    margin-top: 10px;
+}
+
+.default-category {
+    display: none;
 }
 
 .category {
