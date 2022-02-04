@@ -8,7 +8,7 @@ $goalId = $_GET["goalId"];
 include_once("includes/view-goal.php");
 
 $_GET["newCategory"] = $category->getName();
-include_once("includes/categories.php");
+include("includes/categories.php");
 
 ?>
 
@@ -40,9 +40,11 @@ include_once("includes/categories.php");
     </form>
 </div>
 
-<script src="javascript/select-category.js"></script>
-<script src="javascript/new-category.js"></script>
-<script src="javascript/step-checkbox.js"></script>
-<script src="javascript/view-goal-close.js"></script>
+<?php
 
-<?php include_once("includes/footer.php"); ?>
+addJavaScript("step-checkbox");
+addJavaScript("view-goal-close");
+
+include_once("includes/footer.php");
+
+?>

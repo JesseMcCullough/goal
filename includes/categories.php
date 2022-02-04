@@ -17,6 +17,10 @@ if (isset($_GET["showNewCategory"])) {
 
 <!-- might need to make this a selection option for the form. -->
 <ul class="categories">
+    <li class="category default-category" data-category-id="-1">
+        <div class="color-square" style="background-color: #ECECEC"></div>
+        <span>Default</span>
+    </li>
     <?php foreach (Category::getCategories($_SESSION["user_id"]) as $currentCategory) :?>
         <li class="category<?php if ($isNewCategory && $currentCategory->getName() == $_GET["newCategory"]) { echo " new"; } ?>"
             data-category-id="<?php echo $currentCategory->getId(); ?>">
@@ -25,6 +29,12 @@ if (isset($_GET["showNewCategory"])) {
         </li>
     <?php endforeach; ?>
     <?php if ($isNewCategoryAllowed) :?>
-        <li class="new-category-link">New Category</li>
+        <li class="new-category-link">Edit Categories</li>
     <?php endif; ?>
 </ul>
+
+<?php 
+
+unset($_GET["newCategory"], $_GET["showNewCategory"]);
+
+?>

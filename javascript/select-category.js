@@ -24,6 +24,8 @@ function addOnClickEventToAllCategories(event) {
  */
 function setActiveCategory(category, ignoreDeselect) {
     let categorySpan = category.querySelector("span");
+    let categoryNameElement = document.querySelector("input[name='category-name'");
+    let categoryColorElement = document.querySelector("input[name='category-hex-color'")
     categoryId = category.dataset.categoryId;
 
     if (ignoreDeselect) {
@@ -35,6 +37,9 @@ function setActiveCategory(category, ignoreDeselect) {
     if (isCategoryDeselected) {
         hexColor = defaultHexColor;
         categoryId = -1;
+        categoryNameElement.value = "";
+        categoryNameElement.placeholder = "New Category";
+        categoryColorElement.value = "#000000";
     }
     
     isCategoryChangedWhileViewingGoal = window.location.pathname.includes("view-goal.php");
@@ -42,8 +47,16 @@ function setActiveCategory(category, ignoreDeselect) {
     removeActiveCategory();
     
     if (!isCategoryDeselected || ignoreDeselect) {
-        category.querySelector("span").classList.add("active");
-        hexColor = category.querySelector(".color-square").style.backgroundColor;
+        // add active tag to popup category and main category
+        for (let category of document.querySelectorAll(".category[data-category-id='" + categoryId + "']")) {
+            category.querySelector("span").classList.add("active");
+        }
+        
+        hexColor = convertRGBToHex(category.querySelector(".color-square").style.backgroundColor);
+
+        categoryNameElement.value = categorySpan.textContent;
+        categoryNameElement.placeholder = categorySpan.textContent;
+        categoryColorElement.value = hexColor;
     }
 
     // add color to all goal classes
@@ -65,4 +78,14 @@ function removeActiveCategory() {
     for (let category of categories) {
         category.querySelector("span").classList.remove("active");
     }
+}
+
+function convertRGBToHex(rgb) {
+    rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+
+    function hex(x) {
+        return ("0" + parseInt(x).toString(16)).slice(-2);
+    }
+
+    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
 }

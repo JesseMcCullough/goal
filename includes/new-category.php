@@ -9,4 +9,6 @@ if (!isset($_SESSION)) {
 $category = new Category(null);
 $category->createCategory($_GET["categoryName"], $_GET["categoryHexColor"], $_SESSION["user_id"]);
 
+echo $category->getId();
+
 ?>
