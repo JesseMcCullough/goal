@@ -29,7 +29,6 @@ function onClickAddStep() {
 
 function onClickDone() {
      // get goal name
-    console.log('done');
     let goal = document.querySelector(".goal input[name='goal']");
     let goalName = goal.value.trim();
 
@@ -118,7 +117,6 @@ function onClickDone() {
             }
         };
         goalRequest.send();
-        console.log(requestUrl);
     }
 
 }
