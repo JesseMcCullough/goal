@@ -13,7 +13,7 @@ $category = $goal->getCategory();
 
 ?>
 
-<div class="goal<?php if (isset($_GET["goalId"])) { echo " view-goal"; } else { echo " click"; } ?>" style="border-color: #<?php echo $category->getHexColor(); ?>"
+<div class="goal<?php if (isset($_GET["goalId"])) { echo " view-goal"; } else { echo " click"; } ?>" style="border-color: <?php echo $category->getHexColor(); ?>"
     data-goal-id="<?php echo $goalId; ?>"
     data-category-id="<?php echo $category->getId(); ?>"
     data-category-hex-color="#<?php echo $category->getHexColor(); ?>">

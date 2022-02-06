@@ -17,7 +17,7 @@ function onClickAddStep() {
 
     // Request a new step and insert it at the beginning.
     let newStepRequest = new XMLHttpRequest();
-    newStepRequest.open("GET", "includes/step/new-step.php?step=" + step + "&hexColor=" + hexColor, true);
+    newStepRequest.open("GET", "includes/step/new-step.php?step=" + step + "&hexColor=" + encodeURIComponent(hexColor), true);
     newStepRequest.onload = function() {
         if (this.status == 200) {
             steps.insertAdjacentHTML("afterbegin", this.responseText);
@@ -29,6 +29,7 @@ function onClickAddStep() {
 
 function onClickDone() {
      // get goal name
+    console.log('done');
     let goal = document.querySelector(".goal input[name='goal']");
     let goalName = goal.value.trim();
 
@@ -117,6 +118,7 @@ function onClickDone() {
             }
         };
         goalRequest.send();
+        console.log(requestUrl);
     }
 
 }

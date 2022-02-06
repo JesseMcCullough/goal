@@ -18,18 +18,18 @@ if (!isset($_SESSION["user_id"])) {
     <button type="submit" class="go">Go</button>
 </form>
 
-<?php include("includes/category/categories.php"); ?>
+<?php include(INCLUDE_PATH . "category/categories.php"); ?>
 
 <div class="divider"></div>
 
 <div class="goals">
     <?php
 
-    include("classes/Goal.php");;
+    include(CLASS_PATH . "Goal.php");;
 
     $goals = Goal::getGoals($_SESSION["user_id"]);
     foreach ($goals as $goal) {
-        include("includes/goal/view-goal.php");
+        include(INCLUDE_PATH . "goal/view-goal.php");
     }
 
     ?>
@@ -41,6 +41,6 @@ addJavaScript("click-to-view-goal");
 addJavaScript("sort-goals");
 addJavaScript("new-goal-category-preselect");
 
-include_once("includes/footer.php");
+include_once(INCLUDE_PATH . "footer.php");
 
 ?>

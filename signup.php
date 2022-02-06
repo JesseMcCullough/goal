@@ -51,7 +51,7 @@ if (isset($_POST["submit"])) {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    include("classes/UserSignUp.php");
+    include(CLASS_PATH . "UserSignUp.php");
 
     $signUp = new UserSignUp($firstName, $lastName, $email, $password);
     if ($signUp->signUp()) {
@@ -67,4 +67,4 @@ if (isset($_POST["submit"])) {
 
 ?>
 
-<?php include_once("includes/footer.php"); ?>
+<?php include_once(INCLUDE_PATH . "footer.php"); ?>

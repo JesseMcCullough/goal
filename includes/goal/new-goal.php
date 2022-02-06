@@ -1,6 +1,8 @@
 <?php
 
-include_once("../../classes/Goal.php");
+// This script is always a request.
+include_once("../constants.php");
+include_once(CLASS_PATH . "Goal.php");
 
 session_start();
 

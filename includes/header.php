@@ -1,6 +1,6 @@
 <?php
 
-include_once("includes/autoloader.php");
+include_once("autoloader.php");
 
 if (!isset($_SESSION)) {  
     session_start();
@@ -35,7 +35,7 @@ addJavaScript("new-category");
             <?php 
             
             $_GET["showNewCategory"] = false;
-            include("includes/categories.php");
+            include(INCLUDE_PATH . "category/categories.php");
 
             ?>
         </div>

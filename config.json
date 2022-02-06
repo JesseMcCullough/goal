@@ -1,0 +1,8 @@
+{
+    "database": {
+        "name": "goals",
+        "host": "localhost",
+        "username": "root",
+        "password": ""
+    }
+}

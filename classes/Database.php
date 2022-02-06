@@ -10,10 +10,13 @@ class Database {
 
     public function __construct() {
         // TO-DO: hide database login for production. local development database login can be shown.
-        $this->name = "goals";
-        $this->host = "localhost";
-        $this->username = "root";
-        $this->password = "";
+        $configString = file_get_contents(SERVER_PATH . "config.json");
+        $database = json_decode($configString, true)["database"];
+
+        $this->name = $database["name"];
+        $this->host = $database["host"];
+        $this->username = $database["username"];
+        $this->password = $database["password"];
         $this->connection = new mysqli($this->host, $this->username, $this->password, $this->name);
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-require_once("classes/Database.php");
+require_once(CLASS_PATH . "Database.php");
 
 class UserSignUp {
 
