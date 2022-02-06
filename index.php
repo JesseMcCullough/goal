@@ -7,9 +7,12 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 
+include_once(CLASS_PATH . "User.php");
+$user = new User($_SESSION["user_id"]);
+
 ?>
 
-<span id="greeting">Hi, Jesse</span>
+<span id="greeting">Hi, <?php echo $user->getFirstName(); ?></span>
 <a href="includes/logout.php" id="logout">Logout</a>
 <h1>What do you want to accomplish?</h1>
 <form action="edit-goal.php" method="POST" class="goal">
