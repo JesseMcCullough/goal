@@ -139,11 +139,16 @@ class Goal {
     }
 
     public function deleteStep($stepId) {
-        $query = "DELETE FROM goal_steps WHERE id = ?";
+        // Check if step was completed.
+        if ($this->getStepIsCompleted($stepId)) {
+            // Update goal steps completed.
+            $newStepsCompleted = $this->getStepsCompleted() - 1;
+            $query = "UPDATE goals SET steps_completed = ? WHERE id = ?";
 
-        $statement = $this->database->getConnection()->prepare($query);
-        $statement->bind_param("i", $stepId);
-        $statement->execute();
+            $statement = $this->database->getConnection()->prepare($query);
+            $statement->bind_param("ii", $newStepsCompleted, $this->id);
+            $statement->execute();
+        }
 
         // Update goal steps count.
         $newStepsTotal = $this->getStepsTotal() - 1;
@@ -152,6 +157,25 @@ class Goal {
         $statement = $this->database->getConnection()->prepare($query);
         $statement->bind_param("ii", $newStepsTotal, $this->id);
         $statement->execute();
+
+        // Delete step.
+        $query = "DELETE FROM goal_steps WHERE id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        $statement->bind_param("i", $stepId);
+        $statement->execute();
+    }
+
+    // TO-DO: Create a Step class for more conventional method names.
+    public function getStepIsCompleted($stepId) {
+        $query = "SELECT is_completed FROM goal_steps WHERE id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        $statement->bind_param("i", $stepId);
+        $statement->execute();
+
+        $result = $statement->get_result();
+        return boolval($result->fetch_assoc()["is_completed"]);
     }
 
     public function setStepIsCompleted($isCompleted, $stepId) {
