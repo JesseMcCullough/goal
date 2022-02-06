@@ -8,9 +8,9 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-$goalId = $_GET["goalId"];
-$isCompleted = $_GET["isCompleted"];
-$stepId = $_GET["stepId"];
+$goalId = $_POST["goalId"];
+$isCompleted = $_POST["isCompleted"];
+$stepId = $_POST["stepId"];
 
 $goal = new Goal($goalId);
 

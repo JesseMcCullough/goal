@@ -4,10 +4,10 @@
 
 <?php
 
-$goalId = $_GET["goalId"];
+$_POST["goalId"] = $_GET["goalId"];
 include_once(INCLUDE_PATH . "goal/view-goal.php");
 
-$_GET["newCategory"] = $category->getName();
+$_POST["newCategory"] = $category->getName();
 include(INCLUDE_PATH . "category/categories.php");
 
 ?>
@@ -19,11 +19,11 @@ include(INCLUDE_PATH . "category/categories.php");
     <?php
 
     foreach ($goal->getSteps() as $step) {
-        $_GET["id"] = $step["id"];
-        $_GET["name"] = $step["name"];
-        $_GET["date"] = $step["dateFormatted"];
-        $_GET["hexColor"] = $category->getHexColor();
-        $_GET["isCompleted"] = $step["isCompleted"];
+        $_POST["id"] = $step["id"];
+        $_POST["name"] = $step["name"];
+        $_POST["date"] = $step["dateFormatted"];
+        $_POST["hexColor"] = $category->getHexColor();
+        $_POST["isCompleted"] = $step["isCompleted"];
         include(INCLUDE_PATH . "step/view-step.php");
     }
     

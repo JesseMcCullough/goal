@@ -9,9 +9,9 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-$categoryId = $_GET["categoryId"];
-$goalName = $_GET["goal"];
-$steps = json_decode($_GET["steps"]);
+$categoryId = $_POST["categoryId"];
+$goalName = $_POST["goal"];
+$steps = json_decode($_POST["steps"]);
 
 $category = new Category($categoryId);
 

@@ -16,15 +16,19 @@ function onClickAddStep() {
     step++;
 
     // Request a new step and insert it at the beginning.
+    let requestUrl = "includes/step/new-step.php";
+    let params = "step=" + step + "&hexColor=" + encodeURIComponent(hexColor);
+
     let newStepRequest = new XMLHttpRequest();
-    newStepRequest.open("GET", "includes/step/new-step.php?step=" + step + "&hexColor=" + encodeURIComponent(hexColor), true);
+    newStepRequest.open("POST", requestUrl, true);
+    newStepRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     newStepRequest.onload = function() {
         if (this.status == 200) {
             steps.insertAdjacentHTML("afterbegin", this.responseText);
             applyDateInputEvents();
         }
     };
-    newStepRequest.send();
+    newStepRequest.send(params);
 }
 
 function onClickDone() {
@@ -83,31 +87,34 @@ function onClickDone() {
 
     if (isValidGoal) {
         let requestUrl = null;
+        let params = null;
 
         let isExistingGoal = goal.hasAttribute("data-goal-id");
         if (isExistingGoal) {
             let goalId = goal.dataset.goalId;
             if (goalName != "") {
                 // Request an existing goal to be updated.
-                requestUrl = "includes/goal/edit-goal.php?goalId=" + goalId
+                requestUrl = "includes/goal/edit-goal.php";
+                params = "goalId=" + goalId
                         + "&name=" + encodeURIComponent(goalName)
                         + "&categoryId=" + categoryId
                         + "&steps=" + JSON.stringify(steps);
             } else {
                 // Request an existing goal to be deleted.
-                requestUrl = "includes/goal/delete-goal.php?goalId=" + goalId;
+                requestUrl = "includes/goal/delete-goal.php";
+                params = "goalId=" + goalId;
             }
         } else {
             // Request a new goal to be created.
-            requestUrl = "includes/goal/new-goal.php?categoryId=" + categoryId
+            requestUrl = "includes/goal/new-goal.php";
+            params = "categoryId=" + categoryId
                     + "&goal=" + encodeURIComponent(goalName)
                     + "&steps=" + JSON.stringify(steps);
         }
 
-        console.log(requestUrl);
-
         let goalRequest = new XMLHttpRequest();
-        goalRequest.open("GET", requestUrl, true);
+        goalRequest.open("POST", requestUrl, true);
+        goalRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         goalRequest.onloadend = function() {
             if (this.status == 200) {
                 let goalId = this.responseText;
@@ -118,7 +125,7 @@ function onClickDone() {
                 }
             }
         };
-        goalRequest.send();
+        goalRequest.send(params);
     }
 
 }
