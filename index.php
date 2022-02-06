@@ -40,7 +40,6 @@ $user = new User($_SESSION["user_id"]);
 
 <?php 
 
-addJavaScript("click-to-view-goal");
 addJavaScript("sort-goals");
 addJavaScript("new-goal-category-preselect");
 
