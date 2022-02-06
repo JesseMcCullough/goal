@@ -37,12 +37,10 @@ if (isset($_POST["submit"])) {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    include(CLASS_PATH . "UserLogin.php");
+    include(CLASS_PATH . "User.php");
 
-    $login = new UserLogin($email, $password);
-    if ($login->login()) {
-        echo "Successfully logged in";
-        
+    $user = new User(null);
+    if ($user->login($email, $password)) {
         header("Location: index.php");
     } else {
         echo "Failed login";

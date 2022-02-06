@@ -51,13 +51,10 @@ if (isset($_POST["submit"])) {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    include(CLASS_PATH . "UserSignUp.php");
+    include(CLASS_PATH . "User.php");
 
-    $signUp = new UserSignUp($firstName, $lastName, $email, $password);
-    if ($signUp->signUp()) {
-        session_start();
-        
-
+    $user = new User(null);
+    if ($user->signUp($firstName, $lastName, $email, $password)) {
         header("Location: index.php");
     } else {
         echo "Failed";
