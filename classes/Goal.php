@@ -274,6 +274,43 @@ class Goal {
         return $goals;
     }
 
+    public function verifyGoalOwnership($userId) {
+        $query = "SELECT id FROM goals WHERE id = ? AND user_id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        $statement->bind_param("ii", $this->id, $userId);
+        $statement->execute();
+
+        $result = $statement->get_result();
+
+        // If the goal does not belong to the user.
+        if ($result->num_rows <= 0) {
+            return false;
+        }
+        // Goal does belong to the user.
+
+        return true;
+    }
+
+    public function verifyStepOwnership($stepId) {
+        $query = "SELECT id FROM goal_steps WHERE id = ? AND goal_id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        $statement->bind_param("ii", $stepId, $this->id);
+        $statement->execute();
+
+        $result = $statement->get_result();
+
+        // If the step does not belong to the goal.
+        if ($result->num_rows <= 0) {
+            return false;
+        }
+        // Step does belong to the goal.
+
+        return true;
+    }
+
+
     private function formatDate($date) {
         $dateObj = date_create($date);
         return date_format($dateObj, "F j, Y");

@@ -104,12 +104,14 @@ function onClickDone() {
                     + "&steps=" + JSON.stringify(steps);
         }
 
+        console.log(requestUrl);
+
         let goalRequest = new XMLHttpRequest();
         goalRequest.open("GET", requestUrl, true);
         goalRequest.onloadend = function() {
             if (this.status == 200) {
                 let goalId = this.responseText;
-                if (goalId) {
+                if (goalId != "unverified") {
                     location.href = "view-goal.php?goalId=" + goalId;  
                 } else {
                     location.href = "index.php";

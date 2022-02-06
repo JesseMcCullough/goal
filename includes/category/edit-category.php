@@ -4,7 +4,18 @@
 include_once("../constants.php");
 include_once(CLASS_PATH . "Category.php");
 
+if (!isset($_SESSION)) {
+    session_start();
+}
+
 $categoryId = $_GET["categoryId"];
+
+$category = new Category($categoryId);
+
+if (!$category->verifyCategoryOwnership($_SESSION["user_id"])) {
+    header("Location: index.php");
+    exit();
+}
 
 $name = null;
 if (isset($_GET["categoryName"])) {
@@ -16,7 +27,6 @@ if (isset($_GET["categoryHexColor"])) {
     $hexColor = $_GET["categoryHexColor"];
 }
 
-$category = new Category($categoryId);
 $category->editCategory($name, $hexColor);
 
 if ($name == null) {

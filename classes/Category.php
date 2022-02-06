@@ -113,5 +113,27 @@ class Category {
 
         return $categories;
     }
+
+    public function verifyCategoryOwnership($userId) {
+        if ($this->id == -1) { // default category, implicitly belongs to all users.
+            return true;
+        }
+
+        $query = "SELECT id, user_id FROM categories WHERE id = ? AND user_id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        $statement->bind_param("ii", $this->id, $userId);
+        $statement->execute();
+
+        $result = $statement->get_result();
+
+        // If the category does not belong to the user.
+        if ($result->num_rows <= 0) {
+            return false;
+        }
+        // Category belongs to the user.
+
+        return true;
+    }
     
 }

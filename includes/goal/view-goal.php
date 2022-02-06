@@ -9,6 +9,11 @@ if (isset($_GET["goalId"])) {
     $goalId = $goal->getId();
 }
 
+if (!$goal->verifyGoalOwnership($_SESSION["user_id"])) {
+    header("Location: index.php");
+    exit();
+}
+
 $category = $goal->getCategory();
 
 ?>
