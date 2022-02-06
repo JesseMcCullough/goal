@@ -9,16 +9,16 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-$goalId = $_GET["goalId"];
+$goalId = $_POST["goalId"];
 
 $name = null;
-if (isset($_GET["name"])) {
-    $name = $_GET["name"];
+if (isset($_POST["name"])) {
+    $name = $_POST["name"];
 }
 
 $categoryId = null;
-if (isset($_GET["categoryId"])) {
-    $categoryId = $_GET["categoryId"];
+if (isset($_POST["categoryId"])) {
+    $categoryId = $_POST["categoryId"];
     $category = new Category($categoryId);
 
     if (!$category->verifyCategoryOwnership($_SESSION["user_id"])) {
@@ -36,9 +36,8 @@ if (!$goal->verifyGoalOwnership($_SESSION["user_id"])) {
 
 $goal->editGoal($name, $categoryId);
 
-// add support for editing steps.
-if (isset($_GET["steps"])) {
-    $steps = json_decode($_GET["steps"]);
+if (isset($_POST["steps"])) {
+    $steps = json_decode($_POST["steps"]);
     for ($x = 0; $x < count($steps); $x++) {
         // [$x][0] = name, [$x][1] = date, [$x][2] = optional id
         $step = $steps[$x];

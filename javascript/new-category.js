@@ -44,24 +44,28 @@ function onClickNewCategoryAddButton() {
     let categoryHexColor = document.querySelector(".new-category input[name='category-hex-color']");
 
     // Request a new category to be created.
-    let newCategoryRequest = new XMLHttpRequest();
-
     let requestUrl = null;
+    let newCategoryParams = null;
     if (categoryId == -1) {
         // Request a new category to be created.
-        requestUrl = "includes/category/new-category.php?categoryName=" + encodeURIComponent(categoryNameElement.value)
+        requestUrl = "includes/category/new-category.php";
+        newCategoryParams = "categoryName=" + encodeURIComponent(categoryNameElement.value)
                 + "&categoryHexColor=" + encodeURIComponent(categoryHexColor.value);
     } else {
         // Request an existing category to be updated.
-        requestUrl = "includes/category/edit-category.php?categoryId=" + categoryId
+        requestUrl = "includes/category/edit-category.php";
+        newCategoryParams = "categoryId=" + categoryId
                 + "&categoryHexColor=" + encodeURIComponent(categoryHexColor.value);
+        
         if (categoryNameElement.value != "") {
-            requestUrl += "&categoryName=" + encodeURIComponent(categoryNameElement.value);
+            newCategoryParams += "&categoryName=" + encodeURIComponent(categoryNameElement.value);
         }
     }
     let initialCategoryId = categoryId;
 
-    newCategoryRequest.open("GET", requestUrl, true);
+    let newCategoryRequest = new XMLHttpRequest();
+    newCategoryRequest.open("POST", requestUrl, true);
+    newCategoryRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     newCategoryRequest.onload = function() {
         if (this.status == 200) {
             // Reset inputs for new category.
@@ -76,14 +80,16 @@ function onClickNewCategoryAddButton() {
     newCategoryRequest.onloadend = function() {
         if (this.status == 200) {
             // Request all categories to show the newly added category.
-            let categoriesRequest = new XMLHttpRequest();
-
             requestUrl = "includes/category/categories.php";
+            let categoriesParams = "";
+
             if (categoryId != -1) {
-                requestUrl += "?newCategory=" + encodeURIComponent(categoryName);
+                categoriesParams += "newCategory=" + encodeURIComponent(categoryName);
             }
 
-            categoriesRequest.open("GET", requestUrl, true);
+            let categoriesRequest = new XMLHttpRequest();
+            categoriesRequest.open("POST", requestUrl, true);
+            categoriesRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             categoriesRequest.onload = function() {
                 // Show categories.
                 let categories = document.querySelectorAll(".categories");
@@ -128,8 +134,8 @@ function onClickNewCategoryAddButton() {
                     addOnClickEventToAllCategories(sortGoalsByCategory);
                 }
             };
-            categoriesRequest.send();
+            categoriesRequest.send(categoriesParams);
         }
     };
-    newCategoryRequest.send();
+    newCategoryRequest.send(newCategoryParams);
 }

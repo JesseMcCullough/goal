@@ -1,10 +1,10 @@
 <?php
 
-$id = $_GET["id"];
-$name = $_GET["name"];
-$date = $_GET["date"];
-$hexColor = $_GET["hexColor"];
-$isCompleted = $_GET["isCompleted"];
+$id = $_POST["id"];
+$name = $_POST["name"];
+$date = $_POST["date"];
+$hexColor = $_POST["hexColor"];
+$isCompleted = $_POST["isCompleted"];
 
 ?>
 

@@ -8,7 +8,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-$goalId = $_GET["goalId"];
+$goalId = $_POST["goalId"];
 
 $goal = new Goal($goalId);
 

@@ -1,8 +1,8 @@
 <?php
 
 $goalId = -1;
-if (isset($_GET["goalId"])) {
-    $goalId = $_GET["goalId"];
+if (isset($_POST["goalId"])) {
+    $goalId = $_POST["goalId"];
     $goal = new Goal($goalId);
 } else {
     // Goal object available in scope.
@@ -19,7 +19,7 @@ $category = $goal->getCategory();
 ?>
 
 <a href="view-goal.php?goalId=<?php echo $goalId; ?>" class="goal-link">
-    <div class="goal<?php if (isset($_GET["goalId"])) { echo " view-goal"; } else { echo " click"; } ?>" style="border-color: <?php echo $category->getHexColor(); ?>"
+    <div class="goal<?php if (isset($_POST["goalId"])) { echo " view-goal"; } else { echo " click"; } ?>" style="border-color: <?php echo $category->getHexColor(); ?>"
         data-goal-id="<?php echo $goalId; ?>"
         data-category-id="<?php echo $category->getId(); ?>"
         data-category-hex-color="#<?php echo $category->getHexColor(); ?>">

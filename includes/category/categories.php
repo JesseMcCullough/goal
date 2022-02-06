@@ -17,15 +17,15 @@ if (!$hasConstants) {
 
 include_once(CLASS_PATH . "Category.php");
 
-$isNewCategory = isset($_GET["newCategory"]); // active category. misleading name?
+$isNewCategory = isset($_POST["newCategory"]); // active category. misleading name?
 
 if (!isset($_SESSION)) {
     session_start();
 }
 
 $isNewCategoryAllowed = true;
-if (isset($_GET["showNewCategory"])) {
-    $isNewCategoryAllowed = filter_var($_GET["showNewCategory"], FILTER_VALIDATE_BOOLEAN);
+if (isset($_POST["showNewCategory"])) {
+    $isNewCategoryAllowed = filter_var($_POST["showNewCategory"], FILTER_VALIDATE_BOOLEAN);
 }
 
 ?>
@@ -37,10 +37,10 @@ if (isset($_GET["showNewCategory"])) {
         <span>Default</span>
     </li>
     <?php foreach (Category::getCategories($_SESSION["user_id"]) as $currentCategory) :?>
-        <li class="category<?php if ($isNewCategory && $currentCategory->getName() == $_GET["newCategory"]) { echo " new"; } ?>"
+        <li class="category<?php if ($isNewCategory && $currentCategory->getName() == $_POST["newCategory"]) { echo " new"; } ?>"
             data-category-id="<?php echo $currentCategory->getId(); ?>">
             <div class="color-square" style="background-color: <?php echo $currentCategory->getHexColor(); ?>"></div>
-            <span <?php if ($isNewCategory && $currentCategory->getName() == $_GET["newCategory"]) { echo "class=\"active\""; }?>><?php echo $currentCategory->getName(); ?></span>
+            <span <?php if ($isNewCategory && $currentCategory->getName() == $_POST["newCategory"]) { echo "class=\"active\""; }?>><?php echo $currentCategory->getName(); ?></span>
         </li>
     <?php endforeach; ?>
     <?php if ($isNewCategoryAllowed) :?>
@@ -51,6 +51,6 @@ if (isset($_GET["showNewCategory"])) {
 
 <?php 
 
-unset($_GET["newCategory"], $_GET["showNewCategory"]);
+unset($_POST["newCategory"], $_POST["showNewCategory"]);
 
 ?>

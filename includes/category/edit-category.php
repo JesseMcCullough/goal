@@ -8,7 +8,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-$categoryId = $_GET["categoryId"];
+$categoryId = $_POST["categoryId"];
 
 $category = new Category($categoryId);
 
@@ -18,13 +18,13 @@ if (!$category->verifyCategoryOwnership($_SESSION["user_id"])) {
 }
 
 $name = null;
-if (isset($_GET["categoryName"])) {
-    $name = $_GET["categoryName"];
+if (isset($_POST["categoryName"])) {
+    $name = $_POST["categoryName"];
 }
 
 $hexColor = null;
-if (isset($_GET["categoryHexColor"])) {
-    $hexColor = $_GET["categoryHexColor"];
+if (isset($_POST["categoryHexColor"])) {
+    $hexColor = $_POST["categoryHexColor"];
 }
 
 $category->editCategory($name, $hexColor);

@@ -7,7 +7,6 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 
-include_once(CLASS_PATH . "User.php");
 $user = new User($_SESSION["user_id"]);
 
 ?>
@@ -27,9 +26,7 @@ $user = new User($_SESSION["user_id"]);
 
 <div class="goals">
     <?php
-
-    include(CLASS_PATH . "Goal.php");;
-
+    
     $goals = Goal::getGoals($_SESSION["user_id"]);
     foreach ($goals as $goal) {
         include(INCLUDE_PATH . "goal/view-goal.php");

@@ -6,12 +6,14 @@ for (let step of steps) {
 
         let isCompleted = checkbox.classList.contains("checked");
 
-        let goalRequest = new XMLHttpRequest();
-        let requestUrl = "includes/step/edit-step-completion.php?goalId=" + goalId
+        let requestUrl = "includes/step/edit-step-completion.php";
+        let params = "goalId=" + goalId
                 + "&stepId=" + step.dataset.stepId
                 + "&isCompleted=" + isCompleted;
-                
-        goalRequest.open("GET", requestUrl, true);
+        
+        let goalRequest = new XMLHttpRequest();
+        goalRequest.open("POST", requestUrl, true);
+        goalRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         goalRequest.onload = function() {
             if (this.status == 200) {
                 let progressPercentage = this.responseText;
@@ -19,6 +21,6 @@ for (let step of steps) {
                 document.querySelector(".progress .percent").innerHTML = progressPercentage;
             }
         };
-        goalRequest.send();
+        goalRequest.send(params);
     });
 }

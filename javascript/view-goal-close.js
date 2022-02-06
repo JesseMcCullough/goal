@@ -5,10 +5,13 @@ closeButton.addEventListener("click", onClickCloseButton);
 function onClickCloseButton() {
     if (isCategoryChangedWhileViewingGoal) {
          // Send request to edit goal's categeory.
-        let requestUrl = "includes/goal/edit-goal.php?goalId=" + goalId + "&categoryId=" + categoryId
+        let requestUrl = "includes/goal/edit-goal.php";
+        let params = "goalId=" + goalId + "&categoryId=" + categoryId;
+
         let editGoalRequest = new XMLHttpRequest();
-        editGoalRequest.open("GET", requestUrl, true);
-        editGoalRequest.send();
+        editGoalRequest.open("POST", requestUrl, true);
+        editGoalRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        editGoalRequest.send(params);
     }
 
     location.href = "index.php";

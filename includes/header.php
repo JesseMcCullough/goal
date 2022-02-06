@@ -34,7 +34,7 @@ addJavaScript("new-category");
             <button type="button" class="add-category">Add</button>
             <?php 
             
-            $_GET["showNewCategory"] = false;
+            $_POST["showNewCategory"] = false;
             include(INCLUDE_PATH . "category/categories.php");
 
             ?>

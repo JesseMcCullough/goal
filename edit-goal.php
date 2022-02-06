@@ -56,11 +56,11 @@ if (!empty($_POST["categoryIdPreselect"])) {
                 exit();
             }
 
-            $_GET["step"] = $stepCounter++;
-            $_GET["id"] = $step["id"];
-            $_GET["stepName"] = $step["name"];
-            $_GET["date"] = $step["date"];
-            $_GET["hexColor"] = $goal->getCategory()->getHexColor();
+            $_POST["step"] = $stepCounter++;
+            $_POST["id"] = $step["id"];
+            $_POST["stepName"] = $step["name"];
+            $_POST["date"] = $step["date"];
+            $_POST["hexColor"] = $goal->getCategory()->getHexColor();
             include(INCLUDE_PATH . "step/new-step.php");
         }
     } else {
