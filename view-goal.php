@@ -5,10 +5,10 @@
 <?php
 
 $goalId = $_GET["goalId"];
-include_once("includes/view-goal.php");
+include_once(INCLUDE_PATH . "goal/view-goal.php");
 
 $_GET["newCategory"] = $category->getName();
-include("includes/categories.php");
+include(INCLUDE_PATH . "category/categories.php");
 
 ?>
 
@@ -24,7 +24,7 @@ include("includes/categories.php");
         $_GET["date"] = $step["dateFormatted"];
         $_GET["hexColor"] = $category->getHexColor();
         $_GET["isCompleted"] = $step["isCompleted"];
-        include("includes/view-step.php");
+        include(INCLUDE_PATH . "step/view-step.php");
     }
     
     ?>
@@ -45,6 +45,6 @@ include("includes/categories.php");
 addJavaScript("step-checkbox");
 addJavaScript("view-goal-close");
 
-include_once("includes/footer.php");
+include_once(INCLUDE_PATH . "footer.php");
 
 ?>

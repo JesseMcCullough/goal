@@ -1,6 +1,8 @@
 <?php
 
-include_once("../classes/Category.php");
+// This script is always a request.
+include_once("../constants.php");
+include_once(CLASS_PATH . "Category.php");
 
 $categoryId = $_GET["categoryId"];
 
@@ -24,7 +26,7 @@ if ($name == null) {
         session_start();
     }
 
-    include_once("../classes/Goal.php");
+    include_once(CLASS_PATH . "Goal.php");
 
     foreach (Goal::getGoals($_SESSION["user_id"]) as $goal) {
         if ($goal->getCategoryId() == $categoryId) {

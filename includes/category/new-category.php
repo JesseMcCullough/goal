@@ -1,6 +1,8 @@
 <?php
 
-include_once("../classes/Category.php");
+// This script is always a request.
+include_once("../constants.php");
+include_once(CLASS_PATH . "Category.php");
 
 if (!isset($_SESSION)) {
     session_start();

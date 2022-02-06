@@ -23,7 +23,7 @@ if (isset($_POST["goalId"])) {
     <?php endif; ?>
 </div>
 
-<?php include("includes/categories.php"); ?>
+<?php include(INCLUDE_PATH . "category/categories.php"); ?>
 
 <div class="divider"></div>
 
@@ -41,10 +41,10 @@ if (isset($_POST["goalId"])) {
             $_GET["stepName"] = $step["name"];
             $_GET["date"] = $step["date"];
             $_GET["hexColor"] = $goal->getCategory()->getHexColor();
-            include("includes/new-step.php");
+            include(INCLUDE_PATH . "step/new-step.php");
         }
     } else {
-        include("includes/new-step.php");
+        include(INCLUDE_PATH . "step/new-step.php");
     }
     
     ?>
@@ -58,6 +58,6 @@ if (isset($_POST["goalId"])) {
 
 addJavaScript("edit-goal");
 
-include_once("includes/footer.php");
+include_once(INCLUDE_PATH . "footer.php");
 
 ?>

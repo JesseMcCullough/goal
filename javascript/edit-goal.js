@@ -17,7 +17,7 @@ function onClickAddStep() {
 
     // Request a new step and insert it at the beginning.
     let newStepRequest = new XMLHttpRequest();
-    newStepRequest.open("GET", "includes/new-step.php?step=" + step + "&hexColor=" + hexColor, true);
+    newStepRequest.open("GET", "includes/step/new-step.php?step=" + step + "&hexColor=" + encodeURIComponent(hexColor), true);
     newStepRequest.onload = function() {
         if (this.status == 200) {
             steps.insertAdjacentHTML("afterbegin", this.responseText);
@@ -29,6 +29,7 @@ function onClickAddStep() {
 
 function onClickDone() {
      // get goal name
+    console.log('done');
     let goal = document.querySelector(".goal input[name='goal']");
     let goalName = goal.value.trim();
 
@@ -89,17 +90,17 @@ function onClickDone() {
             let goalId = goal.dataset.goalId;
             if (goalName != "") {
                 // Request an existing goal to be updated.
-                requestUrl = "includes/edit-goal.php?goalId=" + goalId
+                requestUrl = "includes/goal/edit-goal.php?goalId=" + goalId
                         + "&name=" + encodeURIComponent(goalName)
                         + "&categoryId=" + categoryId
                         + "&steps=" + JSON.stringify(steps);
             } else {
                 // Request an existing goal to be deleted.
-                requestUrl = "includes/delete-goal.php?goalId=" + goalId;
+                requestUrl = "includes/goal/delete-goal.php?goalId=" + goalId;
             }
         } else {
             // Request a new goal to be created.
-            requestUrl = "includes/new-goal.php?categoryId=" + categoryId
+            requestUrl = "includes/goal/new-goal.php?categoryId=" + categoryId
                     + "&goal=" + encodeURIComponent(goalName)
                     + "&steps=" + JSON.stringify(steps);
         }
@@ -117,6 +118,7 @@ function onClickDone() {
             }
         };
         goalRequest.send();
+        console.log(requestUrl);
     }
 
 }

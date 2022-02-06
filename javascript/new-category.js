@@ -49,14 +49,14 @@ function onClickNewCategoryAddButton() {
     let requestUrl = null;
     if (categoryId == -1) {
         // Request a new category to be created.
-        requestUrl = "includes/new-category.php?categoryName=" + encodeURIComponent(categoryNameElement.value)
-                + "&categoryHexColor=" + categoryHexColor.value.replace("#", "");
+        requestUrl = "includes/category/new-category.php?categoryName=" + encodeURIComponent(categoryNameElement.value)
+                + "&categoryHexColor=" + encodeURIComponent(categoryHexColor.value);
     } else {
         // Request an existing category to be updated.
-        requestUrl = "includes/edit-category.php?categoryId=" + categoryId
-                + "&categoryHexColor=" + categoryHexColor.value.replace("#", "");
+        requestUrl = "includes/category/edit-category.php?categoryId=" + categoryId
+                + "&categoryHexColor=" + encodeURIComponent(categoryHexColor.value);
         if (categoryNameElement.value != "") {
-            requestUrl += "&categoryName=" + encodeURIComponent(categoryNameElement.value)
+            requestUrl += "&categoryName=" + encodeURIComponent(categoryNameElement.value);
         }
     }
     let initialCategoryId = categoryId;
@@ -78,7 +78,7 @@ function onClickNewCategoryAddButton() {
             // Request all categories to show the newly added category.
             let categoriesRequest = new XMLHttpRequest();
 
-            requestUrl = "includes/categories.php";
+            requestUrl = "includes/category/categories.php";
             if (categoryId != -1) {
                 requestUrl += "?newCategory=" + encodeURIComponent(categoryName);
             }

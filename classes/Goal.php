@@ -1,6 +1,6 @@
 <?php
 
-require_once($_SERVER["DOCUMENT_ROOT"] . "/goals/git/classes/Database.php");
+require_once(CLASS_PATH . "Database.php");
 
 class Goal {
 
@@ -63,7 +63,7 @@ class Goal {
     }
 
     public function getCategory() {
-        include_once($_SERVER["DOCUMENT_ROOT"] . "/goals/git/classes/Category.php");
+        include_once(CLASS_PATH . "Category.php");
         return new Category($this->getCategoryId());
     }
 

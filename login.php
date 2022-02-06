@@ -37,7 +37,7 @@ if (isset($_POST["submit"])) {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    include("classes/UserLogin.php");
+    include(CLASS_PATH . "UserLogin.php");
 
     $login = new UserLogin($email, $password);
     if ($login->login()) {
@@ -52,4 +52,4 @@ if (isset($_POST["submit"])) {
 
 ?>
 
-<?php include_once("includes/footer.php"); ?>
+<?php include_once(INCLUDE_PATH . "footer.php"); ?>
