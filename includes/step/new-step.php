@@ -10,6 +10,11 @@ if (isset($_GET["hexColor"])) {
     $hexColor = htmlspecialchars($_GET["hexColor"]);
 }
 
+/*
+if isset(id) then 
+    verifyStep or just post data.
+*/
+
 ?>
 
 <div class="goal step step-<?php echo $step; ?>" style="border-color: <?php echo $hexColor; ?>"

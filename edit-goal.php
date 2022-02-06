@@ -6,9 +6,24 @@ $goalName = null;
 $goal = null;
 if (isset($_POST["goalId"])) {
     $goal = new Goal($_POST["goalId"]);
+
+    if (!$goal->verifyGoalOwnership($_SESSION["user_id"])) {
+        header("Location: index.php");
+        exit();
+    }
+
     $goalName = $goal->getName();
 } else {
     $goalName = $_POST["goal"];
+}
+
+if (!empty($_POST["categoryIdPreselect"])) {
+    $category = new Category($_POST["categoryIdPreselect"]);
+
+    if (!$category->verifyCategoryOwnership($_SESSION["user_id"])) {
+        header("Location: index.php");
+        exit();
+    }
 }
 
 ?>
@@ -36,6 +51,11 @@ if (isset($_POST["goalId"])) {
         $steps = json_decode($_POST["steps"], true);
         $stepCounter = 1;
         foreach ($steps as $step) {
+            if (!$goal->verifyStepOwnership($step["id"])) {
+                header("Location: index.php");
+                exit();
+            }
+
             $_GET["step"] = $stepCounter++;
             $_GET["id"] = $step["id"];
             $_GET["stepName"] = $step["name"];
