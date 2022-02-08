@@ -1,4 +1,11 @@
-<?php include_once("includes/header.php"); ?>
+<?php
+
+ob_start();
+
+$_POST["isAuthorizationRequired"] = true;
+include_once("includes/header.php");
+
+?>
 
 <h1>You can accomplish anything.</h1>
 
@@ -6,6 +13,8 @@
 
 $_POST["goalId"] = $_GET["goalId"];
 include_once(INCLUDE_PATH . "goal/view-goal.php");
+
+ob_end_flush();
 
 $_POST["newCategory"] = $category->getName();
 include(INCLUDE_PATH . "category/categories.php");

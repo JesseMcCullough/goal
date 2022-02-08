@@ -70,7 +70,9 @@ class User {
 
         $this->id = $statement->insert_id;
 
-        session_start();
+        if (!isset($_SESSION)) {
+            session_start();
+        }
         $_SESSION["user_id"] = $this->id;
 
         return true;
@@ -102,7 +104,9 @@ class User {
 
         $this->id = $user["id"];
 
-        session_start();
+        if (!isset($_SESSION)) {
+            session_start();
+        }
         $_SESSION["user_id"] = $this->id;
 
         return true;

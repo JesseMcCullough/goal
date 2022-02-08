@@ -1,5 +1,6 @@
 <?php
 
+$_POST["isAuthorizationRequired"] = true;
 include_once("includes/header.php");
 
 $goalName = null;
@@ -25,6 +26,8 @@ if (!empty($_POST["categoryIdPreselect"])) {
         exit();
     }
 }
+
+ob_start();
 
 ?>
 
@@ -66,6 +69,8 @@ if (!empty($_POST["categoryIdPreselect"])) {
     } else {
         include(INCLUDE_PATH . "step/new-step.php");
     }
+
+    ob_end_flush();
     
     ?>
 </div>

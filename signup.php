@@ -1,12 +1,13 @@
 <?php
 
-session_start();
+include_once("includes/header.php");
+
 if (isset($_SESSION["user_id"])) {
     header("Location: index.php");
     exit();
 }
 
-include_once("includes/header.php");
+ob_start();
 
 ?>
 
@@ -61,6 +62,8 @@ if (isset($_POST["submit"])) {
     }
 
 }
+
+ob_end_flush();
 
 ?>
 

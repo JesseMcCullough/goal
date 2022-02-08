@@ -1,12 +1,14 @@
 <?php
 
-session_start();
+ob_start();
+
+$_POST["isCategoriesShown"] = false;
+include_once("includes/header.php");
+
 if (isset($_SESSION["user_id"])) {
     header("Location: index.php");
     exit();
 }
-
-include_once("includes/header.php");
 
 ?>
 
@@ -23,7 +25,7 @@ include_once("includes/header.php");
 
 <?php
 
-if (isset($_POST["submit"])) {
+if (isset($_POST["submit"])) { // send to new form. header cannot handle
     if (!isset($_POST["email"])) {
         echo "Email not set";
         return;
@@ -42,11 +44,14 @@ if (isset($_POST["submit"])) {
     $user = new User(null);
     if ($user->login($email, $password)) {
         header("Location: index.php");
+        exit();
     } else {
         echo "Failed login";
     }
 
 }
+
+ob_end_flush();
 
 ?>
 

@@ -256,7 +256,7 @@ class Goal {
         return ceil($this->getStepsCompleted() / $this->getStepsTotal() * 100) . "%";
     }
 
-    public function getGoals($userId) {
+    public static function getGoals($userId) {
         $goals = [];
         $database = new Database();
 
