@@ -15,7 +15,12 @@ $stepId = $_POST["stepId"];
 $goal = new Goal($goalId);
 
 if (!$goal->verifyGoalOwnership($_SESSION["user_id"])) {
-    header("Location: index.php");
+    echo "unverified";
+    exit();
+}
+
+if (!$goal->verifyStepOwnership($stepId)) {
+    echo "unverified";
     exit();
 }
 

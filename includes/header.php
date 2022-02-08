@@ -6,6 +6,24 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+// Authorization
+$isAuthorizationRequired = false;
+if (isset($_POST["isAuthorizationRequired"])) {
+    $isAuthorizationRequired = $_POST["isAuthorizationRequired"];
+}
+
+if ($isAuthorizationRequired && !isset($_SESSION["user_id"])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Categories
+$isCategoriesShown = true;
+if (isset($_POST["isCategoriesShown"])) {
+    $isCategoriesShown = $_POST["isCategoriesShown"];
+}
+
+// JavaScript files
 $scripts = [];
 function addJavaScript($path) {
     global $scripts;
@@ -16,6 +34,7 @@ addJavaScript("select-category");
 addJavaScript("new-category");
 
 ?>
+
 <!DOCTYPE html>
 <html>
 <head> 
@@ -34,12 +53,13 @@ addJavaScript("new-category");
             <button type="button" class="add-category">Add</button>
             <?php 
             
-            $_POST["showNewCategory"] = false;
-            include(INCLUDE_PATH . "category/categories.php");
+            if ($isCategoriesShown) {
+                $_POST["showNewCategory"] = false; // Edit categories link
+                include(INCLUDE_PATH . "category/categories.php");
+            }
 
             ?>
         </div>
     </div>
 
     <div class="container">
-    

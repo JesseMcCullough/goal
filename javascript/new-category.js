@@ -77,8 +77,18 @@ function onClickNewCategoryAddButton() {
             categoryId = this.responseText;
         }
     };
+
     newCategoryRequest.onloadend = function() {
         if (this.status == 200) {
+            if (categoryId == "unverified") {
+                categoryId = -1;
+                activeCategory = document.querySelector(".default-category");
+                setActiveCategory(activeCategory);
+                setActiveCategory(activeCategory); // for deselect
+                sortGoalsByCategory();
+                return;
+            }
+
             // Request all categories to show the newly added category.
             requestUrl = "includes/category/categories.php";
             let categoriesParams = "";

@@ -13,7 +13,7 @@ $categoryId = $_POST["categoryId"];
 $category = new Category($categoryId);
 
 if (!$category->verifyCategoryOwnership($_SESSION["user_id"])) {
-    header("Location: index.php");
+    echo "unverified";
     exit();
 }
 
@@ -31,10 +31,6 @@ $category->editCategory($name, $hexColor);
 
 if ($name == null) {
     $category->deleteCategory();
-
-    if (!isset($_SESSION)) {
-        session_start();
-    }
 
     include_once(CLASS_PATH . "Goal.php");
 

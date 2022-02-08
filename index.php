@@ -1,11 +1,7 @@
 <?php
 
+$_POST["isAuthorizationRequired"] = true;
 include_once("includes/header.php");
-
-if (!isset($_SESSION["user_id"])) {
-    header("Location: login.php");
-    exit();
-}
 
 $user = new User($_SESSION["user_id"]);
 

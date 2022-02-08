@@ -2,9 +2,7 @@ let steps = document.querySelectorAll(".goal.step");
 for (let step of steps) {
     step.addEventListener("click", function() {
         let checkbox = step.querySelector(".checkbox");
-        checkbox.classList.toggle("checked");
-
-        let isCompleted = checkbox.classList.contains("checked");
+        let isCompleted = !checkbox.classList.contains("checked"); // toggling "checked" after verifcation.
 
         let requestUrl = "includes/step/edit-step-completion.php";
         let params = "goalId=" + goalId
@@ -17,6 +15,14 @@ for (let step of steps) {
         goalRequest.onload = function() {
             if (this.status == 200) {
                 let progressPercentage = this.responseText;
+
+                if (progressPercentage == "unverified") {
+                    location.href = "index.php";
+                    return;
+                }
+
+                checkbox.classList.toggle("checked");
+                
                 document.querySelector(".progress .completion-bar").style.width = progressPercentage;
                 document.querySelector(".progress .percent").innerHTML = progressPercentage;
             }
