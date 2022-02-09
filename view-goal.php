@@ -2,6 +2,7 @@
 
 ob_start();
 
+$_POST["title"] = "changeTitle";
 $_POST["isAuthorizationRequired"] = true;
 include_once("includes/header.php");
 
@@ -13,6 +14,10 @@ include_once("includes/header.php");
 
 $_POST["goalId"] = $_GET["goalId"];
 include_once(INCLUDE_PATH . "goal/view-goal.php");
+
+$contents = str_replace("changeTitle", $goal->getName(), ob_get_contents());
+ob_clean();
+echo $contents;
 
 ob_end_flush();
 

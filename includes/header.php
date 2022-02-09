@@ -33,6 +33,13 @@ function addJavaScript($path) {
 addJavaScript("select-category");
 addJavaScript("new-category");
 
+// Title
+$title = "Goaler";
+if (isset($_POST["title"])) {
+    $temp = $title;
+    $title = $_POST["title"] . " | " . $temp;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +48,7 @@ addJavaScript("new-category");
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <title>Home</title>
+    <title><?php echo $title; ?></title>
 </head>
 <body>
     <div class="new-category">

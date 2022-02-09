@@ -9,8 +9,7 @@ class Database {
     private $connection;
 
     public function __construct() {
-        // TO-DO: hide database login for production. local development database login can be shown.
-        $configString = file_get_contents(SERVER_PATH . "../config.json");
+        $configString = file_get_contents(SERVER_PATH . "config.json");
         $database = json_decode($configString, true)["database"];
 
         $this->name = $database["name"];
