@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * Creates a new goal.
+ * 
+ * A categoryId is required. $_POST["categoryId"].
+ * A goal name is required. $_POST["goal"].
+ * A goal's steps are required, JSON encoded. $_POST["steps"].
+ * 
+ * If the category does not belong to the user, "unverified" will be returned;
+ * otherwise, the new goal's ID will be returned.
+ */
+
 // This script is always a request.
 include_once("../constants.php");
 include_once(CLASS_PATH . "Goal.php");

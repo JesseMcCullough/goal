@@ -2,20 +2,39 @@
 
 require_once(CLASS_PATH . "Database.php");
 
+/**
+ * A goal's category, identified by an ID and has a name, a hex color, and a user ID.
+ * 
+ * To create a new category, create a new Category object and set its ID to null
+ * and call its respective method.
+ */
 class Category {
 
     private $id;
     private $database;
 
+    /**
+     * Creates a new Category. For a new category, set id to null.
+     */
     public function __construct($id) {
         $this->id = $id;
         $this->database = new Database();
     }
 
+    /**
+     * Gets the category's ID.
+     * 
+     * @return Category's ID.
+     */
     public function getId() {
         return $this->id;
     }
 
+    /**
+     * Gets the category's name.
+     * 
+     * @return Category's name.
+     */
     public function getName() {
         $query = "SELECT name FROM categories WHERE id = ?";
 
@@ -27,6 +46,11 @@ class Category {
         return $result->fetch_assoc()["name"];
     }
 
+    /**
+     * Gets the category's hex color.
+     * 
+     * @return Category's hex color.
+     */
     public function getHexColor() {
         $query = "SELECT hex_color FROM categories WHERE id = ?";
 
@@ -38,6 +62,15 @@ class Category {
         return $result->fetch_assoc()["hex_color"];
     }
 
+    /**
+     * Creates a new category.
+     * 
+     * @param name Category's name
+     * @param hexColor Category's hex color
+     * @param userId Category's user ID
+     * @return false if the category already exists; otherwise, true if the
+     *          category was successfully created.
+     */
     public function createCategory($name, $hexColor, $userId) {
         $query = "SELECT id, name FROM categories WHERE name = ? AND user_id = ?";
 
@@ -65,6 +98,12 @@ class Category {
         return true;
     }
 
+    /**
+     * Edits a category.
+     * 
+     * @param name Category's name, optional
+     * @param hexColor Category's hex color, optional
+     */
     public function editCategory($name, $hexColor) {
         $query = "UPDATE categories SET ";
         if (isset($name) && isset($hexColor)) {
@@ -87,6 +126,9 @@ class Category {
         $statement->execute();
     }
 
+    /**
+     * Deletes a category.
+     */
     public function deleteCategory() {
         $query = "DELETE FROM categories WHERE id = ?";
 
@@ -95,6 +137,11 @@ class Category {
         $statement->execute();
     }
 
+    /**
+     * Gets the categories of a user.
+     * 
+     * @param userId User's ID
+     */
     public static function getCategories($userId) {
         $categories = [];
 
@@ -114,6 +161,12 @@ class Category {
         return $categories;
     }
 
+    /**
+     * Verifies category ownership by a user.
+     * 
+     * @param userId User's ID
+     * @return true if the category belongs to the user; otherwise, false.
+     */
     public function verifyCategoryOwnership($userId) {
         if ($this->id == -1) { // default category, implicitly belongs to all users.
             return true;

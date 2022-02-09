@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * The database. Login credentials provided by config.json. 
+ */
 class Database {
 
     private $name;

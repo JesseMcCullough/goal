@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * Edit's a category.
+ * A category ID is required. $_POST["categoryID"].
+ * A category name is optional but recommended. $_POST["categoryName"].
+ * A category hex color is optional but recommended. $_POST["categoryHexColor"].
+ * 
+ * If the category does not belong to the user, "unverified" will be returned.
+ * If the category name is not set, the category will be deleted and -1 will be returned.
+ * In any other case, the category ID will be returned.
+ */
+
 // This script is always a request.
 include_once("../constants.php");
 include_once(CLASS_PATH . "Category.php");

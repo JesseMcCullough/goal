@@ -1,12 +1,19 @@
 <?php
 
+/*
+ * Generates a page's <head> and starter <body> tags.
+ * To set a page's title, set $_POST["title"] to the title.
+ * To not generate the new categories popup, set $_POST["isCategoriesShown"] to false.
+ * To add a JavaScript file, call addJavaScript("file-name") without the .js extension.
+ */
+
 include_once("autoloader.php");
 
 if (!isset($_SESSION)) {  
     session_start();
 }
 
-// Authorization
+// If isAuthorizationRequired is set to true, a user must be logged in to view the page.
 $isAuthorizationRequired = false;
 if (isset($_POST["isAuthorizationRequired"])) {
     $isAuthorizationRequired = $_POST["isAuthorizationRequired"];
@@ -17,13 +24,13 @@ if ($isAuthorizationRequired && !isset($_SESSION["user_id"])) {
     exit();
 }
 
-// Categories
+// If isCategoriesShown is set to false, the new categories popup will not be generated.
 $isCategoriesShown = true;
 if (isset($_POST["isCategoriesShown"])) {
     $isCategoriesShown = $_POST["isCategoriesShown"];
 }
 
-// JavaScript files
+// JavaScript files. These are added within footer.php.
 $scripts = [];
 function addJavaScript($path) {
     global $scripts;
@@ -33,7 +40,7 @@ function addJavaScript($path) {
 addJavaScript("select-category");
 addJavaScript("new-category");
 
-// Title
+// If a title is given, the title will be "GIVEN_TITLE | Goaler".
 $title = "Goaler";
 if (isset($_POST["title"])) {
     $temp = $title;
