@@ -1,5 +1,6 @@
 <?php
 
+$_POST["title"] = "Sign Up";
 include_once("includes/header.php");
 
 if (isset($_SESSION["user_id"])) {

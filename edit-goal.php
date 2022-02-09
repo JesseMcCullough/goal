@@ -1,8 +1,12 @@
 <?php
 
+ob_start();
+
+$_POST["title"] = "changeTitle";
 $_POST["isAuthorizationRequired"] = true;
 include_once("includes/header.php");
 
+$title = null;
 $goalName = null;
 $goal = null;
 if (isset($_POST["goalId"])) {
@@ -14,8 +18,10 @@ if (isset($_POST["goalId"])) {
     }
 
     $goalName = $goal->getName();
+    $title = "Edit Goal";
 } else {
     $goalName = $_POST["goal"];
+    $title = "New Goal";
 }
 
 if (!empty($_POST["categoryIdPreselect"])) {
@@ -27,7 +33,9 @@ if (!empty($_POST["categoryIdPreselect"])) {
     }
 }
 
-ob_start();
+$contents = str_replace("changeTitle", $title, ob_get_contents());
+ob_clean();
+echo $contents;
 
 ?>
 

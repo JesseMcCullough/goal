@@ -2,6 +2,7 @@
 
 ob_start();
 
+$_POST["title"] = "Login";
 $_POST["isCategoriesShown"] = false;
 include_once("includes/header.php");
 
