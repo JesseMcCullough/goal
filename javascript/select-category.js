@@ -56,6 +56,7 @@ function setActiveCategory(category, ignoreDeselect) {
 
         categoryNameElement.value = categorySpan.textContent;
         categoryNameElement.placeholder = categorySpan.textContent;
+        categoryNameElement.style.borderColor = "#ECECEC";
         categoryColorElement.value = hexColor;
     }
 
