@@ -48,6 +48,11 @@ function onClickNewCategoryAddButton() {
     let newCategoryParams = null;
     if (categoryId == -1) {
         // Request a new category to be created.
+        if (categoryNameElement.value == "") {
+            categoryNameElement.style.borderColor = "#FF0000";
+            return;
+        }
+
         requestUrl = "includes/category/new-category.php";
         newCategoryParams = "categoryName=" + encodeURIComponent(categoryNameElement.value)
                 + "&categoryHexColor=" + encodeURIComponent(categoryHexColor.value);
@@ -72,6 +77,7 @@ function onClickNewCategoryAddButton() {
             newCategoryPopup.style.display = "none";
             document.body.style.overflowY = "initial";
             categoryNameElement.value = "";
+            categoryNameElement.style.borderColor = "#ECECEC";
             categoryNameElement.placeholder = "New Category";
             categoryHexColor.value = "#000000";
             categoryId = this.responseText;
