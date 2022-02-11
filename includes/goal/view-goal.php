@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * Views a goal.
+ * A goal ID must be provided, so set $_POST["goalId"] to the ID or have a Goal object
+ *      available within this scope.
+ * 
+ * IF the goal does not belong to the user, the user will be redirected to the dashboard.
+ */
+
 $goalId = -1;
 if (isset($_POST["goalId"])) {
     $goalId = $_POST["goalId"];

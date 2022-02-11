@@ -1,5 +1,17 @@
 <?php
 
+/*
+ * Edits a goal.
+ * A goal ID is required. $_POST["goalId"].
+ * A goal's name is optional. $_POST["name"].
+ * A goal's categoryId is optional. $_POST["categoryId"].
+ * A goal's steps are optional. $_POST["steps"].
+ * 
+ * If the user does not own the category, goal, or step, "unverified" will be returned.
+ * If the goal no longer has any steps, the goal will be deleted and null will be returned.
+ * In any other case, the goal ID will be returned.
+ */
+
 // This script is always a request.
 include_once("../constants.php");
 include_once(CLASS_PATH . "Goal.php");

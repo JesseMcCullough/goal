@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * Creates a new category.
+ * A category name is required. $_POST["categoryName"].
+ * A category hex color is required. $_POST["categoryHexColor"].
+ * 
+ * The new category's ID will be returned.
+ */
+
 // This script is always a request.
 include_once("../constants.php");
 include_once(CLASS_PATH . "Category.php");

@@ -1,4 +1,10 @@
 <?php
+
+/*
+ * Views a goal's new step to be inserted with data.
+ * A step counter is optional but recommended. $_POST["step"].
+ * A step hex color is optional but recommened. $_POST["hexColor"].
+ */
  
 $step = 1; // step counter.
 if (isset($_POST["step"])) {

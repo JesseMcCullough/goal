@@ -1,4 +1,11 @@
-<?php 
+<?php
+
+/*
+ * Views the categories.
+ * If a new category has been added, set $_POST["newCategory"] to the new category's name
+ *      so that it can be selected.
+ * If the New/Edit Categories link should not be shown, set $_POST["showNewCategory"] to false.
+ */
 
 // This script can be a request. As a safeguard, this script ensures the path to constants.php is correct before including it.
 $includedFiles = get_included_files();
@@ -30,7 +37,6 @@ if (isset($_POST["showNewCategory"])) {
 
 ?>
 
-<!-- might need to make this a selection option for the form. -->
 <ul class="categories">
     <li class="category default-category" data-category-id="-1">
         <div class="color-square" style="background-color: #ECECEC"></div>
