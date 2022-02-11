@@ -57,7 +57,8 @@ if (isset($_POST["submit"])) {
 
     $user = new User(null);
     if ($user->signUp($firstName, $lastName, $email, $password)) {
-        header("Location: index.php");
+        header("Location: index.php?signUp=true");
+        exit();
     } else {
         echo "Failed";
     }
