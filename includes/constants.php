@@ -9,7 +9,7 @@
 
 $path = $_SERVER["DOCUMENT_ROOT"];
 if (strpos($path, "Development")) {
-    $path .= "/goals/git";
+    $path .= "/Goaler/git";
 }
 $path .= "/";
 

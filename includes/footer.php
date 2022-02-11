@@ -22,6 +22,28 @@ foreach ($scripts as $script) {
     echo '<script src="javascript/' . $script . '.js"></script>';
 }
 
+if (!empty($notifications)) {
+    echo "<script>";
+
+    foreach ($notifications as $notification) {
+        echo "addNotification('" . addslashes(htmlspecialchars($notification["text"])) . "'";
+
+        $duration = $notification["duration"];
+        if ($duration) {
+            echo ", " . $duration . "";
+        }
+
+        $type = $notification["type"];
+        if ($type) {
+            echo ", '" . $type . "'";
+        }
+
+        echo ");";
+    }
+
+    echo "</script>";
+}
+
 ?>
 
 </body>

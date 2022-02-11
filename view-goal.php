@@ -11,6 +11,21 @@ $_POST["title"] = "changeTitle";
 $_POST["isAuthorizationRequired"] = true;
 include_once("includes/header.php");
 
+$notification = "Successfully edited "; // Successfully edited goal name and category
+if (isset($_GET["editedName"])) {
+    $notification .= "goal name";
+
+    if (isset($_GET["editedCategory"])) {
+        $notification .= " and category";
+    }
+} else if (isset($_GET["editedCategory"])) {
+    $notification .= "category";
+} else {
+    $notification = null;
+}
+
+addNotification($notification, 5000);
+
 ?>
 
 <h1>You can accomplish anything.</h1>

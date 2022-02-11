@@ -19,9 +19,13 @@ if (isset($_POST["goalId"])) {
 
     $goalName = $goal->getName();
     $title = "Edit Goal";
+
+    addNotification("Editing Goal: <strong>" . $goalName . "</strong>");
 } else {
     $goalName = $_POST["goal"];
     $title = "New Goal";
+
+    addNotification("Creating a new goal");
 }
 
 if (!empty($_POST["categoryIdPreselect"])) {

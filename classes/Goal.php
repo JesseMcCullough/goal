@@ -436,6 +436,28 @@ class Goal {
         return true;
     }
 
+    public function isSameName($name) {
+        $query = "SELECT name FROM goals WHERE id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        $statement->bind_param("i", $this->id);
+        $statement->execute();
+
+        $goal = $statement->get_result()->fetch_assoc();
+        return $goal["name"] == $name;
+    }
+
+    public function isSameCategory($categoryId) {
+        $query = "SELECT category_id FROM goals WHERE id = ?";
+
+        $statement = $this->database->getConnection()->prepare($query);
+        $statement->bind_param("i", $this->id);
+        $statement->execute();
+
+        $goal = $statement->get_result()->fetch_assoc();
+        return $goal["category_id"] == $categoryId;
+    }
+
     /**
      * Formats a date.
      * Example format: January 1, 2022

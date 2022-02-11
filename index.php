@@ -5,6 +5,10 @@ include_once("includes/header.php");
 
 $user = new User($_SESSION["user_id"]);
 
+if (isset($_GET["editedCategory"])) {
+    addNotification("Swiftly edited that goal's category after closing it", 5000);
+}
+
 ?>
 
 <span id="greeting">Hi, <?php echo $user->getFirstName(); ?></span>
