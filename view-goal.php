@@ -1,5 +1,10 @@
 <?php
 
+if (!isset($_GET["goalId"])) {
+    header("Location: index.php");
+    exit();
+}
+
 ob_start();
 
 $_POST["title"] = "changeTitle";

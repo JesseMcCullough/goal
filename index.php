@@ -31,7 +31,7 @@ $user = new User($_SESSION["user_id"]);
     ?>
 </div>
 
-<?php 
+<?php
 
 addJavaScript("sort-goals");
 addJavaScript("new-goal-category-preselect");
