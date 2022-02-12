@@ -123,7 +123,7 @@ function onClickDone() {
 
                 try {
                     responseJSON = JSON.parse(response);
-                    isJSON = true;
+                    isJSON = responseJSON && typeof responseJSON === "object";
                 } catch (e) { /* ignore */ }
 
                 if (isJSON) {
