@@ -501,6 +501,10 @@ button.close:hover {
     transition-duration: 0.4s;
 }
 
+.notifications a {
+    color: #ffffff;
+}
+
 .notifications .error {
     background-color: #ff5b5b;
 }

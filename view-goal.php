@@ -13,13 +13,13 @@ include_once("includes/header.php");
 
 $notification = "Successfully edited "; // Successfully edited goal name and category
 if (isset($_GET["editedName"])) {
-    $notification .= "goal name";
+    $notification .= "goal's name";
 
     if (isset($_GET["editedCategory"])) {
         $notification .= " and category";
     }
 } else if (isset($_GET["editedCategory"])) {
-    $notification .= "category";
+    $notification .= "goal's category";
 } else {
     $notification = null;
 }

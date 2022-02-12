@@ -129,6 +129,7 @@ function onClickNewCategoryAddButton() {
                     // Set active category.
                     activeCategory = document.querySelectorAll(".category.new")[1];
                     setActiveCategory(activeCategory, true);
+                    //addNotification("New category created"); Cannot test if category was created or edited yet.
                 } else {
                     activeCategory = document.querySelector(".category");
                     if (!activeCategory) {
@@ -142,6 +143,8 @@ function onClickNewCategoryAddButton() {
                         goal.dataset.categoryId = -1;
                         goal.dataset.categoryHexColor = "#ECECEC";
                     }
+
+                    addNotification("Category deleted", 5000);
                 }
 
                 // Sort goals by category.

@@ -26,18 +26,19 @@ if (!empty($notifications)) {
     echo "<script>";
 
     foreach ($notifications as $notification) {
-        echo "addNotification('" . addslashes(htmlspecialchars($notification["text"])) . "'";
-
         $duration = $notification["duration"];
-        if ($duration) {
-            echo ", " . $duration . "";
+        if ($duration == null) {
+            $duration = "null";
         }
 
         $type = $notification["type"];
-        if ($type) {
-            echo ", '" . $type . "'";
+        if ($type == null) {
+            $type = "null";
         }
 
+        echo "addNotification('" . addslashes($notification["text"]) . "'";
+        echo ", " . $duration . "";
+        echo ", '" . $type . "'";
         echo ");";
     }
 
