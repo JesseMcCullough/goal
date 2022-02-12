@@ -117,8 +117,38 @@ function onClickDone() {
         goalRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         goalRequest.onloadend = function() {
             if (this.status == 200) {
-                let goalId = this.responseText;
-                if (goalId != "unverified") {
+                let response = this.responseText;
+                let isJSON = false;
+                let responseJSON = null;
+
+                try {
+                    responseJSON = JSON.parse(response);
+                    isJSON = responseJSON && typeof responseJSON === "object";
+                } catch (e) { /* ignore */ }
+
+                if (isJSON) {
+                    if (responseJSON["goalId"] != "unverified") {
+                        directTo = "view-goal.php?goalId=" + responseJSON["goalId"];
+
+                        if (responseJSON["editedName"]) {
+                            directTo += "&editedName=true";
+                        }
+
+                        if (responseJSON["editedCategory"]) {
+                            directTo += "&editedCategory=true";
+                        }
+
+                        location.href = directTo;
+                    } else {
+                        location.href = "index.php";
+                    }
+
+                    return;
+                }
+
+                let goalId = response;
+
+                if (response != "unverified") {
                     location.href = "view-goal.php?goalId=" + goalId;  
                 } else {
                     location.href = "index.php";

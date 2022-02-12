@@ -5,6 +5,10 @@ include_once("includes/header.php");
 
 $user = new User($_SESSION["user_id"]);
 
+if (isset($_GET["editedCategory"])) {
+    addNotification("Swiftly edited that goal's category after closing it", 5000);
+}
+
 ?>
 
 <span id="greeting">Hi, <?php echo $user->getFirstName(); ?></span>
@@ -32,6 +36,10 @@ $user = new User($_SESSION["user_id"]);
 </div>
 
 <?php
+
+if (isset($_GET["signUp"]) && filter_var($_GET["signUp"], FILTER_VALIDATE_BOOLEAN)) {
+    addNotification("Thanks for signing up. Get started by creating your first goal.");
+}
 
 addJavaScript("sort-goals");
 addJavaScript("new-goal-category-preselect");

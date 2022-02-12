@@ -483,3 +483,32 @@ button.close:hover {
 .login input {
     padding-left: 20px;
 }
+
+.notifications {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.notifications p {
+    background-color: #5fd58c; /* might change later, setting it the same as .success */
+    color: #ffffff;
+    padding: 5px 15px;
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.4s;
+}
+
+.notifications a {
+    color: #ffffff;
+}
+
+.notifications .error {
+    background-color: #ff5b5b;
+}
+
+.notifications .success {
+    background-color: #5fd58c;
+}

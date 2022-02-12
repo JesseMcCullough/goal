@@ -37,6 +37,7 @@ function addJavaScript($path) {
     $scripts[] = $path;
 }
 
+addJavaScript("notifications");
 addJavaScript("select-category");
 addJavaScript("new-category");
 
@@ -52,6 +53,15 @@ $title = "Goaler";
 if (isset($_POST["title"])) {
     $temp = $title;
     $title = $_POST["title"] . " | " . $temp;
+}
+
+// Notifications.
+$notifications = [];
+function addNotification($text, $duration = null, $type = null) {
+    global $notifications;
+    if ($text) {
+        $notifications[] = ["text" => $text, "duration" => $duration, "type" => $type];
+    }
 }
 
 ?>
@@ -74,6 +84,8 @@ if (isset($_POST["title"])) {
 <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M37SWSJ"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <div class="notifications"></div>
 
     <?php if ($isCategoriesShown) : ?>
         <div class="new-category">

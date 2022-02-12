@@ -46,6 +46,16 @@ if (!$goal->verifyGoalOwnership($_SESSION["user_id"])) {
     exit();
 }
 
+$editedName = false;
+if ($name != null && !$goal->isSameName($name)) {
+    $editedName = true;
+}
+
+$editedCategoryId = false;
+if ($categoryId != null && !$goal->isSameCategory($categoryId)) {
+    $editedCategoryId = true;
+}
+
 $goal->editGoal($name, $categoryId);
 
 if (isset($_POST["steps"])) {
@@ -79,4 +89,6 @@ if ($goal->getStepsTotal() == 0) {
     $goalId = null;
 }
 
-echo $goalId;
+$goalDetails = array("goalId" => $goalId, "editedName" => $editedName, "editedCategory" => $editedCategoryId);
+
+echo json_encode($goalDetails);
