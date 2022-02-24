@@ -128,14 +128,14 @@ function onClickDone() {
 
                 if (isJSON) {
                     if (responseJSON["goalId"] != "unverified") {
-                        directTo = "view-goal.php?goalId=" + responseJSON["goalId"];
+                        directTo = encodeURIComponent(goalName) + "-" + responseJSON["goalId"]; 
 
                         if (responseJSON["editedName"]) {
-                            directTo += "&editedName=true";
+                            directTo += "?editedName=true";
                         }
 
                         if (responseJSON["editedCategory"]) {
-                            directTo += "&editedCategory=true";
+                            directTo += "?editedCategory=true";
                         }
 
                         location.href = directTo;
@@ -149,7 +149,7 @@ function onClickDone() {
                 let goalId = response;
 
                 if (response != "unverified") {
-                    location.href = "view-goal.php?goalId=" + goalId;  
+                    location.href = encodeURIComponent(goalName) + "-" + goalId; 
                 } else {
                     location.href = "index.php";
                 }
