@@ -26,7 +26,8 @@ if (!$goal->verifyGoalOwnership($_SESSION["user_id"])) {
 }
 
 $category = $goal->getCategory();
-$goalUrl = urlencode(str_replace(" ", "-", $goalName)) . "-" . $goalId;
+$goalUrl = str_replace("/", "s", $goalName);
+$goalUrl = urlencode(str_replace(" ", "-", $goalUrl)) . "-" . $goalId;
 
 ?>
 

@@ -121,6 +121,8 @@ function onClickDone() {
                 let isJSON = false;
                 let responseJSON = null;
 
+                goalName = goalName.replaceAll("/", "s").replaceAll(" ", "-");
+
                 try {
                     responseJSON = JSON.parse(response);
                     isJSON = responseJSON && typeof responseJSON === "object";
@@ -149,7 +151,7 @@ function onClickDone() {
                 let goalId = response;
 
                 if (response != "unverified") {
-                    location.href = encodeURIComponent(goalName) + "-" + goalId; 
+                    location.href = encodeURIComponent(goalName) + "-" + goalId;
                 } else {
                     location.href = "index.php";
                 }
