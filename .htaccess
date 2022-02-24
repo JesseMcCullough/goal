@@ -1,0 +1,15 @@
+RewriteEngine on
+
+# Rewrite for index.php on localhost, removes mention of index.php
+RewriteCond %{HTTP_HOST} ^localhost [NC]
+RewriteRule ^index\.php/?$ /Goaler/git/ [R=301,NC,L]
+
+# Rewrite for index.php on goaler.net, removes mention of index.php
+RewriteCond %{HTTP_HOST} !^localhost [NC]
+RewriteRule ^index\.php/?$ / [R=301,NC,L]
+
+# Rewrite for index.php, redirects index to index.php
+RewriteRule ^index index.php [NC,L]
+
+# Rewrite for view-goal.php
+RewriteRule ^(.+)-([0-9]+) view-goal.php?goalName=$1&goalId=$2 [NC,L,QSA]

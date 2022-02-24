@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($_GET["goalId"])) {
+if (!isset($_GET["goalId"]) || !isset($_GET["goalName"])) {
     header("Location: index.php");
     exit();
 }
@@ -33,6 +33,7 @@ addNotification($notification, 5000);
 <?php
 
 $_POST["goalId"] = $_GET["goalId"];
+$_POST["goalName"] = $_GET["goalName"];
 include_once(INCLUDE_PATH . "goal/view-goal.php");
 
 $contents = str_replace("changeTitle", $goal->getName(), ob_get_contents());

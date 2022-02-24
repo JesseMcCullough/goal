@@ -9,12 +9,15 @@
  */
 
 $goalId = -1;
+$goalName = null;
 if (isset($_POST["goalId"])) {
     $goalId = $_POST["goalId"];
+    $goalName = $_POST["goalName"];
     $goal = new Goal($goalId);
 } else {
     // Goal object available in scope.
     $goalId = $goal->getId();
+    $goalName = $goal->getName();
 }
 
 if (!$goal->verifyGoalOwnership($_SESSION["user_id"])) {
@@ -23,10 +26,12 @@ if (!$goal->verifyGoalOwnership($_SESSION["user_id"])) {
 }
 
 $category = $goal->getCategory();
+$goalUrl = str_replace("/", "s", $goalName);
+$goalUrl = urlencode(str_replace(" ", "-", $goalUrl)) . "-" . $goalId;
 
 ?>
 
-<a href="view-goal.php?goalId=<?php echo $goalId; ?>" class="goal-link">
+<a href="<?php echo $goalUrl; ?>" class="goal-link">
     <div class="goal<?php if (isset($_POST["goalId"])) { echo " view-goal"; } else { echo " click"; } ?>" style="border-color: <?php echo $category->getHexColor(); ?>"
         data-goal-id="<?php echo $goalId; ?>"
         data-category-id="<?php echo $category->getId(); ?>"
